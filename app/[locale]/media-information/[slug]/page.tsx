@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: MediaArticleRouteProps): Prom
   }
 
   return {
-    title: `Afana — ${item.title}`,
+    title: `${item.title} | Afana`,
     description: item.excerpt,
     alternates: {
       canonical: `/en/media-information/${item.slug}`,

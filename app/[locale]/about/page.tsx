@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: AboutRouteProps): Promise<Met
   const content = aboutPageContent.en;
 
   return {
-    title: `Afana — ${content.title}`,
+    title: `${content.title} | Afana`,
     description: content.description,
     alternates: {
       canonical: "/en/about",

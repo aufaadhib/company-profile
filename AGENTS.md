@@ -14,6 +14,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 2. Simpan milestone, keputusan yang berubah, dan catatan release di dokumen terkait; jangan menumpuknya di `AGENTS.md`.
 3. Gunakan bahasa Inggris untuk nama file, variable, type, class, method, dan function.
 4. Gunakan npm sebagai satu-satunya package manager dan pertahankan `package-lock.json`.
+5. Setelah perubahan, tinjau dokumentasi Markdown yang relevan. Jika perubahan memengaruhi desain, route, interaksi, motion, aksesibilitas, konten, atau release behavior, perbarui `docs/design-system.md`, `docs/roadmap.md`, `CHANGELOG.md`, atau `README.md` yang sesuai dalam perubahan yang sama. Jika tidak ada dokumentasi yang perlu diubah, nyatakan alasannya saat handoff.
 
 ## Project Stack
 

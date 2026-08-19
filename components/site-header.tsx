@@ -84,7 +84,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
       const isScrollingUp = currentScrollY < lastScrollY.current;
 
       setIsScrolled(solid || !isAtTop);
-      setIsHeaderVisible(isAtTop || isScrollingUp || isOpen);
+      setIsHeaderVisible(isAtTop || isScrollingUp || isOpen || openDropdown !== null);
       lastScrollY.current = currentScrollY;
     }
 
@@ -102,7 +102,19 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, solid]);
+  }, [isOpen, openDropdown, solid]);
+
+  useEffect(() => {
+    function handlePointerDown(event: PointerEvent) {
+      const header = headerRef.current;
+      if (header && !header.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, []);
 
   useLayoutEffect(() => {
     const header = headerRef.current;
@@ -153,7 +165,10 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
               {content.languageLabel === "Bahasa" ? "ID" : "EN"}
               <span className="size-2 rounded-full bg-[var(--accent)]" aria-hidden="true" />
             </Link>
-            <Link href={getLocaleHref(content.headerCtaHref, locale)} className="rounded-full border border-white/80 px-5 py-2.5 text-xs font-semibold transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+            <Link
+              href={getLocaleHref(content.headerCtaHref, locale)}
+              className="rounded-full border border-white/80 px-5 py-2.5 text-xs font-semibold transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
               {content.headerCtaLabel}
             </Link>
           </nav>
@@ -161,7 +176,6 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
           <nav aria-label="Primary navigation" className="flex items-center gap-7 text-[0.98rem] font-semibold">
             {content.nav.map((item) => {
               const hasChildren = Boolean(item.children?.length);
-              const isDropdownOpen = openDropdown === item.label;
 
               if (!hasChildren) {
                 return (
@@ -173,17 +187,16 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
 
               return (
                 <div key={item.label} className="group relative">
-                  <button
-                    type="button"
+                  <Link
+                    href={getLocaleHref(item.href, locale)}
                     className={`flex min-h-11 items-center gap-2 whitespace-nowrap transition-colors ${isScrolled ? "hover:text-black/65" : "hover:text-white/70"} focus-visible:outline-2 focus-visible:outline-offset-4 ${isScrolled ? "focus-visible:outline-[var(--ink)]" : "focus-visible:outline-white"}`}
-                    aria-expanded={isDropdownOpen}
                     aria-haspopup="menu"
-                    onClick={() => setOpenDropdown(isDropdownOpen ? null : item.label)}
+                    onClick={() => setOpenDropdown(null)}
                   >
                     {item.label}
-                    <ChevronIcon isOpen={isDropdownOpen} />
-                  </button>
-                  <div className={`invisible absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-3 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 ${isDropdownOpen ? "!visible !opacity-100" : ""}`}>
+                    <ChevronIcon isOpen={false} />
+                  </Link>
+                  <div className="invisible absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-3 opacity-0 transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100">
                     <div className="rounded-2xl bg-white p-3 text-left shadow-[0_20px_50px_rgba(0,24,36,.22)] ring-1 ring-black/5" role="menu">
                       {item.children?.map((child) => (
                         <Link
@@ -206,7 +219,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
             })}
             <button
               type="button"
-              className={`flex min-h-11 min-w-11 items-center justify-center transition-opacity ${isScrolled ? "opacity-100" : "pointer-events-none opacity-0"} focus-visible:outline-2 ${isScrolled ? "focus-visible:outline-[var(--ink)]" : "focus-visible:outline-white"}`}
+              className={`flex min-h-11 min-w-11 items-center justify-center transition-opacity ${isScrolled ? "opacity-100" : "hidden"} focus-visible:outline-2 ${isScrolled ? "focus-visible:outline-[var(--ink)]" : "focus-visible:outline-white"}`}
               aria-label={locale === "id" ? "Cari" : "Search"}
             >
               <SearchIcon />

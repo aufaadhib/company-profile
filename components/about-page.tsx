@@ -10,23 +10,25 @@ type AboutPageProps = {
 };
 
 function AboutContentSection({ section }: { section: AboutSection }) {
+  const isLogoMeaning = section.variant === "logo-meaning";
+
   return (
     <section id={section.id} className="scroll-mt-[calc(var(--header-offset)+5rem)] border-b border-[var(--line)] py-16 sm:py-20 lg:scroll-mt-[calc(var(--header-offset)+5rem)] lg:py-24">
       <div className="mx-auto max-w-5xl">
         {section.blocks ? (
-          <div className="space-y-16">
+          <div className={isLogoMeaning ? "space-y-10 sm:space-y-12" : "space-y-16"}>
             {section.blocks.map((block) => (
               <div key={block.title} className="max-w-5xl">
-                <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-none tracking-[-0.06em] text-[var(--ink)]">
+                <h2 className={`${isLogoMeaning ? "text-[clamp(1.45rem,2.5vw,2rem)] tracking-[-0.04em]" : "text-[clamp(2rem,4vw,3.5rem)] tracking-[-0.06em]"} font-display font-semibold leading-none text-[var(--ink)]`}>
                   {block.title}
                 </h2>
-                <div className="mt-4 space-y-5 text-justify text-lg leading-8 text-[var(--muted)]">
+                <div className={`${isLogoMeaning ? "mt-5 space-y-4 text-left text-base leading-7 sm:text-lg sm:leading-8" : "mt-4 space-y-5 text-justify text-lg leading-8"} text-[var(--muted)]`}>
                   {block.body.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                 </div>
                 {block.list ? (
-                  <ol className="mt-5 list-decimal space-y-2 pl-5 text-justify text-base leading-7 text-[var(--muted)] sm:text-lg sm:leading-8">
+                  <ol className={`${isLogoMeaning ? "mt-5 space-y-3 text-left" : "mt-5 space-y-2 text-justify"} list-decimal pl-5 text-base leading-7 text-[var(--muted)] sm:text-lg sm:leading-8`}>
                     {block.list.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
@@ -57,6 +59,18 @@ function AboutContentSection({ section }: { section: AboutSection }) {
               unoptimized
               sizes="(max-width: 640px) calc(100vw - 3rem), (max-width: 1024px) calc(100vw - 5rem), 1024px"
               className="h-auto w-full object-cover"
+            />
+          </figure>
+        ) : null}
+        {section.logo ? (
+          <figure className="mt-14 flex justify-center sm:mt-16 lg:relative lg:left-1/2 lg:w-screen lg:-translate-x-1/2">
+            <Image
+              src={section.logo.src}
+              alt={section.logo.alt}
+              width={250}
+              height={80}
+              sizes="(max-width: 639px) calc(100vw - 3rem), 76vw"
+              className="h-auto w-[clamp(20rem,76vw,64rem)] max-w-full"
             />
           </figure>
         ) : null}

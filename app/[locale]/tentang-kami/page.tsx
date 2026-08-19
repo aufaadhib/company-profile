@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: AboutRouteProps): Promise<Met
   const content = aboutPageContent[safeLocale];
 
   return {
-    title: `Afana — ${content.title}`,
+    title: `${content.title} | Afana`,
     description: content.description,
     alternates: {
       canonical: safeLocale === "en" ? "/en/about" : "/id/tentang-kami",

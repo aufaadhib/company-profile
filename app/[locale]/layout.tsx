@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   const safeLocale: Locale = isLocale(locale) ? locale : "id";
 
   return {
-    title: `Afana — ${safeLocale === "id" ? "Ruang untuk arah baru" : "A space for new directions"}`,
+    title: `${safeLocale === "id" ? "Ruang untuk arah baru" : "A space for new directions"} | Afana`,
     description:
       safeLocale === "id"
         ? "Prototype company profile Afana dengan arah visual editorial."
@@ -52,7 +52,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   }
 
   return (
-    <html lang={locale} className={`${lexend.variable} ${sourceSans.variable} antialiased`}>
+    <html lang={locale} data-scroll-behavior="smooth" className={`${lexend.variable} ${sourceSans.variable} antialiased`}>
       <body className="min-h-screen bg-[var(--paper)] font-sans text-[var(--ink)]">
         <a className="skip-link" href="#main-content">
           {locale === "id" ? "Lewati ke konten utama" : "Skip to main content"}

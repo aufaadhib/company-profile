@@ -22,12 +22,17 @@ export type AboutSection = {
   id: string;
   title: string;
   body: string[];
+  variant?: "logo-meaning";
   blocks?: Array<{
     title: string;
     body: string[];
     list?: string[];
   }>;
   image?: {
+    src: string;
+    alt: string;
+  };
+  logo?: {
     src: string;
     alt: string;
   };
@@ -56,12 +61,12 @@ export const aboutPageContent: Record<Locale, AboutPageContent> = {
       { label: "Latar Belakang", target: "#latar-belakang" },
       { label: "Visi & Misi", target: "#visi-misi" },
       { label: "Fokus Solusi", target: "#fokus-solusi" },
-      { label: "Peran Afana", target: "#peran-afana" },
+      { label: "Makna Logo", target: "#peran-afana" },
     ],
     sections: [
       {
         id: "profil-afana",
-        title: "Afana",
+        title: "Lebih Dekat Dengan Afana",
         body: [
           "Afana adalah perusahaan yang terbentuk dari ide untuk mewadahi dan menjalankan bisnis para pendirinya yang sebelumnya berjalan secara perorangan. Dengan pengalaman yang telah dibangun dari berbagai bidang, Afana hadir sebagai sarana untuk menyatukan keahlian, memperluas manfaat, dan menjalankan bisnis secara profesional.",
           "Sejak awal, Afana dibangun dengan keyakinan bahwa kualitas layanan tidak hanya ditentukan oleh produk atau perangkat yang digunakan, tetapi juga oleh kemampuan untuk memahami kebutuhan pelanggan secara menyeluruh. Karena itu, setiap pekerjaan dimulai dengan mendengarkan, memetakan kondisi, dan menyusun solusi yang sesuai dengan tujuan operasional pelanggan.",
@@ -192,10 +197,32 @@ export const aboutPageContent: Record<Locale, AboutPageContent> = {
       },
       {
         id: "peran-afana",
-        title: "Menjembatani Teknologi & Kelistrikan",
-        body: [
-          "Afana menjadi solusi yang menjembatani perkembangan teknologi IT yang semakin canggih dengan kondisi kelistrikan yang kurang baik di Indonesia. Kami membantu pelanggan membangun fondasi kelistrikan yang lebih siap agar teknologi dapat bekerja secara optimal dan berkelanjutan.",
+        title: "Makna Logo",
+        variant: "logo-meaning",
+        body: [],
+        blocks: [
+          {
+            title: "Makna Warna",
+            body: ["Warna pada logo Afana merepresentasikan karakter yang menjadi dasar kami dalam menghadirkan solusi kelistrikan."],
+            list: [
+              "Abu-abu gelap melambangkan keteguhan, profesionalisme, dan tanggung jawab dalam menjaga keandalan sistem.",
+              "Abu-abu terang melambangkan kemampuan beradaptasi, keterbukaan, dan kesiapan mengikuti perkembangan teknologi.",
+            ],
+          },
+          {
+            title: "Makna Simbol",
+            body: ["Dua bidang miring pada logo menggambarkan hubungan antara kelistrikan, teknologi, dan arah perkembangan pelanggan."],
+            list: [
+              "Arah diagonal menggambarkan gerak maju, energi, dan komitmen untuk terus berkembang.",
+              "Dua bidang yang bergerak searah melambangkan kolaborasi antara fondasi kelistrikan dan teknologi yang menggunakannya.",
+              "Ruang di antara kedua bidang menjadi simbol koneksi, aliran energi, dan ruang untuk menciptakan solusi yang lebih baik.",
+            ],
+          },
         ],
+        logo: {
+          src: "/afana_logo.svg",
+          alt: "Logo Afana",
+        },
       },
     ],
   },
@@ -210,12 +237,12 @@ export const aboutPageContent: Record<Locale, AboutPageContent> = {
       { label: "Our Background", target: "#latar-belakang" },
       { label: "Vision & Mission", target: "#visi-misi" },
       { label: "Solution Focus", target: "#fokus-solusi" },
-      { label: "Afana's Role", target: "#peran-afana" },
+      { label: "Logo Meaning", target: "#peran-afana" },
     ],
     sections: [
       {
         id: "profil-afana",
-        title: "Afana",
+        title: "Getting to Know Afana Better",
         body: [
           "Afana was formed from the idea of bringing together and operating the businesses of its founders, which had previously been run individually. Built on experience from different fields, Afana provides a professional platform for combining expertise, expanding its impact, and delivering dependable business services.",
           "From the beginning, Afana has believed that service quality is shaped not only by the products or equipment used, but also by the ability to understand each customer's needs as a whole. Every engagement therefore begins by listening, mapping the existing conditions, and building a solution that supports the customer's operational goals.",
@@ -346,10 +373,32 @@ export const aboutPageContent: Record<Locale, AboutPageContent> = {
       },
       {
         id: "peran-afana",
-        title: "Bridging Technology & Electrical Infrastructure",
-        body: [
-          "Afana bridges increasingly advanced IT technology with the challenges of inadequate electrical conditions in Indonesia. We help customers build a stronger electrical foundation so their technology can perform reliably and sustainably.",
+        title: "Logo Meaning",
+        variant: "logo-meaning",
+        body: [],
+        blocks: [
+          {
+            title: "Meaning of the Colours",
+            body: ["The colours in the Afana logo represent the qualities that guide our electrical solutions."],
+            list: [
+              "Dark grey represents resilience, professionalism, and the responsibility to maintain system reliability.",
+              "Light grey represents adaptability, openness, and readiness to keep pace with evolving technology.",
+            ],
+          },
+          {
+            title: "Meaning of the Symbol",
+            body: ["The two slanted shapes represent the relationship between electrical infrastructure, technology, and the direction of customer growth."],
+            list: [
+              "The diagonal direction expresses progress, energy, and a commitment to keep moving forward.",
+              "The two shapes moving in the same direction represent collaboration between the electrical foundation and the technology it supports.",
+              "The space between them symbolises connection, the flow of energy, and room to create better solutions.",
+            ],
+          },
         ],
+        logo: {
+          src: "/afana_logo.svg",
+          alt: "Afana logo",
+        },
       },
     ],
   },

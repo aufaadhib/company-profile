@@ -40,18 +40,17 @@ export const siteContent: Record<Locale, SiteContent> = {
   id: {
     nav: [
       {
-        label: "Tentang Afana",
+        label: "Tentang Kami",
         href: "/tentang-kami",
         children: [
           { label: "Profil Afana", href: "/tentang-kami#profil-afana" },
           { label: "Latar Belakang", href: "/tentang-kami#latar-belakang" },
           { label: "Visi & Misi", href: "/tentang-kami#visi-misi" },
           { label: "Fokus Solusi", href: "/tentang-kami#fokus-solusi" },
-          { label: "Peran Afana", href: "/tentang-kami#peran-afana" },
+          { label: "Makna Logo", href: "/tentang-kami#peran-afana" },
         ],
       },
       { label: "Bisnis Afana", href: "/#hero" },
-      { label: "Hubungan Investor", href: "/#hero-copy" },
       { label: "Media & Informasi", href: "/media-informasi" },
       { label: "Keberlanjutan", href: "/#hero-copy" },
     ],
@@ -90,18 +89,17 @@ export const siteContent: Record<Locale, SiteContent> = {
   en: {
     nav: [
       {
-        label: "About Afana",
+        label: "About Us",
         href: "/about",
         children: [
           { label: "Afana Profile", href: "/about#profil-afana" },
           { label: "Our Background", href: "/about#latar-belakang" },
           { label: "Vision & Mission", href: "/about#visi-misi" },
           { label: "Solution Focus", href: "/about#fokus-solusi" },
-          { label: "Afana's Role", href: "/about#peran-afana" },
+          { label: "Logo Meaning", href: "/about#peran-afana" },
         ],
       },
       { label: "Afana Business", href: "/#hero" },
-      { label: "Investor Relations", href: "/#hero-copy" },
       { label: "Media & Information", href: "/media-information" },
       { label: "Sustainability", href: "/#hero-copy" },
     ],

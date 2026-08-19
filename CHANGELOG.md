@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Atur media hero home sebagai `loading="eager"` agar slide full-viewport tidak terlambat saat menjadi kandidat LCP pada autoplay.
+- Batalkan seluruh implementasi CMS, termasuk route admin/API, authentication, database integration, media upload, dependency terkait, dan environment lokal CMS; situs kembali menggunakan konten lokal.
 - Perbaiki link header, menu mobile, footer, dan CTA agar konsisten menuju route `/id` atau `/en`, termasuk anchor beranda.
 - Tambahkan aturan URL multi bahasa ke `AGENTS.md` dan dokumentasi design system.
 - Pisahkan route About bahasa Inggris menjadi `/en/about`; `/en/tentang-kami` dipertahankan sebagai redirect legacy.
@@ -11,6 +13,22 @@
 - Pastikan autoplay hero Media & Informasi tidak berhenti hanya karena pointer berada di atas area hero.
 - Sesuaikan hero Media & Informasi menjadi full viewport `100svh` seperti hero Home.
 - Turunkan posisi copy hero Media & Informasi agar tidak bertabrakan dengan navbar pada desktop.
+- Sembunyikan sementara menu Hubungan Investor dari navigasi Indonesia dan Inggris.
+- Ubah format metadata title menjadi `Judul Halaman | Afana` pada seluruh route publik.
+- Arahkan navigasi Profil Afana langsung ke section Afana melalui anchor `#profil-afana`.
+- Perbaiki dropdown topbar agar menutup saat klik di luar dan tetap terlihat saat sedang dibuka ketika halaman discroll.
+- Tempatkan kembali CTA Meet Afana di utility topbar, sejajar dengan bahasa di sisi kanan.
+- Rapatkan primary navigation ke sisi kanan dengan menghapus ruang Search yang tidak terlihat saat header transparan.
+- Ubah klik parent About Afana menjadi navigasi langsung ke bagian paling atas halaman About; dropdown tetap terbuka melalui hover dan keyboard focus.
+- Batasi dropdown desktop agar hanya terbuka saat pointer berada di area hover, bukan karena parent masih fokus setelah diklik.
+- Tambahkan `data-scroll-behavior="smooth"` pada root layout untuk menghilangkan warning route transition Next.js 16.
+- Stabilkan posisi anchor About saat navigasi lintas halaman setelah scroll otomatis Next.js selesai.
+- Ubah section Peran Afana menjadi Makna Logo dengan narasi bilingual berdasarkan bentuk logo Afana.
+- Susun section Makna Logo dengan format editorial berisi makna warna, makna simbol, dan lockup logo Afana.
+- Hilangkan garis pemisah sebelum lockup logo dan perbesar ukuran logo pada section Makna Logo.
+- Perbesar kembali lockup logo Makna Logo menjadi 2× dari ukuran sebelumnya secara responsif.
+- Satukan simbol dan wordmark Makna Logo menjadi satu aset SVG agar alignment dan area visualnya terhitung sebagai satu logo.
+- Tambahkan aturan workflow agar dokumentasi Markdown yang relevan selalu ditinjau dan diperbarui bersama perubahan kode.
 
 Semua perubahan penting pada proyek ini dicatat di sini.
 

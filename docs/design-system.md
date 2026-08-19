@@ -74,7 +74,7 @@ Header adalah elemen fixed di atas viewport:
 - Saat hamburger menu terbuka, header tetap berada di layer teratas dan overlay menu menempel langsung ke viewport.
 - Hamburger menu dapat ditutup melalui tombol close, link navigasi, atau tombol `Escape`.
 
-Pada desktop, navigasi memiliki primary navigation dan utility navigation. Dropdown menggunakan focus state, hover state, dan panel putih dengan radius serta shadow ringan.
+Pada desktop, navigasi memiliki primary navigation dan utility navigation. CTA header berada di utility navigation, sejajar dengan link pendukung dan bahasa di sisi kanan. Dropdown menggunakan focus state, hover state, dan panel putih dengan radius serta shadow ringan.
 
 ## Home hero
 
@@ -86,7 +86,7 @@ Hero home adalah media full-bleed dengan tinggi `100svh` dan fokus pada solusi k
 - Heading besar menyampaikan manfaat utama solusi kelistrikan bagi perlindungan perangkat.
 - Rail pagination berada di bagian bawah hero dan berfungsi sebagai penanda slide sekaligus kontrol navigasi.
 - Swiper memakai fade transition dengan speed `1200ms`, keyboard navigation, pagination clickable, accessibility labels, dan autoplay `7000ms`.
-- Slide pertama diprioritaskan sebagai media LCP; slide lain mengikuti kebutuhan carousel.
+- Seluruh media hero dimuat eager karena setiap slide full-viewport dapat menjadi kandidat LCP saat autoplay; jumlahnya tetap dibatasi pada aset hero.
 
 ## Media & Informasi
 
@@ -112,7 +112,7 @@ Halaman About menyajikan profil Afana melalui urutan informasi yang jelas:
 4. Timeline perjalanan Afana.
 5. Visi & Misi dalam satu section dengan dua blok konten.
 6. Fokus pada Solusi Kelistrikan.
-7. Peran Afana sebagai jembatan antara teknologi dan infrastruktur kelistrikan.
+7. Makna Logo dengan susunan pengantar, daftar makna warna, daftar makna simbol, dan satu aset lockup logo Afana di bagian bawah.
 
 Body copy About menggunakan warna muted, line-height longgar, dan `text-justify` untuk menjaga bentuk kolom editorial. Setiap section memiliki divider bawah dan scroll margin yang mempertimbangkan header.
 

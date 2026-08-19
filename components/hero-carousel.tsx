@@ -49,7 +49,7 @@ export function HeroCarousel({ slides, content }: HeroCarouselProps) {
               alt=""
               fill
               sizes="100vw"
-              priority={index === 0}
+              loading="eager"
               className="object-cover"
             />
             <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(0,30,42,.58)_0%,rgba(2,116,151,.15)_38%,rgba(1,30,40,.72)_100%)]" />
