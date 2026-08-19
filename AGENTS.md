@@ -95,6 +95,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 4. Jangan menambahkan klaim, skill, pengalaman, klien, statistik, alamat, atau profil sosial yang belum dikonfirmasi pengguna.
 5. Gunakan struktur URL dan internal link yang jelas untuk beranda, proyek, tentang, dan kontak jika halaman tersebut memang memiliki konten cukup.
 
+## URL and Language Routing
+
+1. Semua URL internal lintas halaman harus memakai prefix locale aktif (`/id` atau `/en`).
+2. Hash-only URL hanya boleh digunakan untuk anchor pada halaman yang sama.
+3. Link menuju anchor di halaman lain harus menggunakan path locale-aware, misalnya `/${locale}/#hero-copy`, `/${locale}/tentang-kami#profil-afana`, atau `/${locale}/about#profil-afana` sesuai bahasa.
+4. Language switcher harus mempertahankan halaman dan slug aktif, termasuk mapping route yang nama segmennya berbeda antar bahasa.
+5. Gunakan mapping segmen resmi: bahasa Indonesia memakai `/tentang-kami` dan `/media-informasi`, sedangkan bahasa Inggris memakai `/about` dan `/media-information`.
+6. Route legacy seperti `/en/tentang-kami` boleh dipertahankan hanya sebagai redirect ke route Inggris yang canonical.
+7. Jangan menambahkan URL internal placeholder yang tidak memiliki route atau target DOM.
+
 ## Code Quality and Verification
 
 1. Sebelum membuat komponen, hook, helper, atau dependency baru, periksa implementasi yang sudah ada dan gunakan solusi paling sederhana yang memenuhi kebutuhan.

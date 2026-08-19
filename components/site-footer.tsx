@@ -1,15 +1,13 @@
 import Link from "next/link";
 
+import { FooterLanguageLink } from "@/components/footer-language-link";
+import { getLocaleHref } from "@/content/site-content";
 import type { Locale, SiteContent } from "@/content/site-content";
 
 type SiteFooterProps = {
   locale: Locale;
   content: SiteContent;
 };
-
-function resolveHref(href: string, locale: Locale) {
-  return href.startsWith("/") ? `/${locale}${href}` : href;
-}
 
 function AfanaMark() {
   return (
@@ -39,7 +37,7 @@ export function SiteFooter({ locale, content }: SiteFooterProps) {
           <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-white/45">{locale === "id" ? "Jelajahi" : "Explore"}</h2>
           <nav aria-label="Footer primary navigation" className="mt-5 flex flex-col items-start gap-3">
             {content.nav.map((item) => (
-              <Link key={item.label} href={resolveHref(item.href, locale)} className="text-sm text-white/75 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              <Link key={item.label} href={getLocaleHref(item.href, locale)} className="text-sm text-white/75 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
                 {item.label}
               </Link>
             ))}
@@ -50,13 +48,11 @@ export function SiteFooter({ locale, content }: SiteFooterProps) {
           <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-white/45">{locale === "id" ? "Informasi" : "Information"}</h2>
           <nav aria-label="Footer utility navigation" className="mt-5 flex flex-col items-start gap-3">
             {content.mobileFooterNav.map((item) => (
-              <Link key={item.label} href={resolveHref(item.href, locale)} className="text-sm text-white/75 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              <Link key={item.label} href={getLocaleHref(item.href, locale)} className="text-sm text-white/75 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
                 {item.label}
               </Link>
             ))}
-            <Link href={`/${locale === "id" ? "en" : "id"}`} className="text-sm text-white/75 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-              {content.languageLabel === "Bahasa" ? "English" : "Bahasa Indonesia"}
-            </Link>
+            <FooterLanguageLink locale={locale} label={content.languageLabel === "Bahasa" ? "English" : "Bahasa Indonesia"} />
           </nav>
         </div>
 
@@ -65,7 +61,7 @@ export function SiteFooter({ locale, content }: SiteFooterProps) {
           <p className="mt-5 max-w-xs text-sm leading-6 text-white/65">
             {locale === "id" ? "Sampaikan kebutuhan konten dan identitas yang ingin dikembangkan." : "Share the content and identity direction you want to develop."}
           </p>
-          <Link href={content.headerCtaHref} className="mt-6 inline-flex min-h-11 items-center rounded-full border border-white/75 px-5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+          <Link href={getLocaleHref(content.headerCtaHref, locale)} className="mt-6 inline-flex min-h-11 items-center rounded-full border border-white/75 px-5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
             {content.headerCtaLabel}
           </Link>
         </div>

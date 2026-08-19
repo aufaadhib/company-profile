@@ -20,6 +20,7 @@ export function HeroCarousel({ slides, content }: HeroCarouselProps) {
       <Swiper
         modules={[A11y, Autoplay, EffectFade, Keyboard, Pagination]}
         id="hero-copy"
+        key={reducedMotion ? "reduced-motion" : "autoplay"}
         className="absolute inset-0 z-10 h-full w-full"
         wrapperClass="h-full"
         rewind
@@ -34,7 +35,7 @@ export function HeroCarousel({ slides, content }: HeroCarouselProps) {
             return `<button type="button" class="${className} hero-pagination__bullet" aria-label="${content.slideLabel} ${index + 1}: ${label}"><span class="hero-pagination__label"><span class="hero-pagination__dot" aria-hidden="true"></span><span>${label}</span></span><span class="hero-pagination__line" aria-hidden="true"></span></button>`;
           },
         }}
-        autoplay={reducedMotion ? undefined : { delay: 7000, disableOnInteraction: false, pauseOnMouseEnter: false }}
+        autoplay={{ enabled: !reducedMotion, delay: 7000, disableOnInteraction: false, pauseOnMouseEnter: false }}
         a11y={{
           prevSlideMessage: content.previousLabel,
           nextSlideMessage: content.nextLabel,

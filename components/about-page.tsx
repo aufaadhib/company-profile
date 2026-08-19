@@ -1,6 +1,8 @@
 import Image from "next/image";
 
+import { AboutSectionHashSync } from "@/components/about-section-hash-sync";
 import { AboutTimeline } from "@/components/about-timeline";
+import { AboutSectionNav } from "@/components/about-section-nav";
 import type { AboutPageContent, AboutSection } from "@/content/about-content";
 
 type AboutPageProps = {
@@ -9,7 +11,7 @@ type AboutPageProps = {
 
 function AboutContentSection({ section }: { section: AboutSection }) {
   return (
-    <section id={section.id} className="scroll-mt-20 border-b border-[var(--line)] py-16 sm:py-20 lg:scroll-mt-36 lg:py-24">
+    <section id={section.id} className="scroll-mt-[calc(var(--header-offset)+5rem)] border-b border-[var(--line)] py-16 sm:py-20 lg:scroll-mt-[calc(var(--header-offset)+5rem)] lg:py-24">
       <div className="mx-auto max-w-5xl">
         {section.blocks ? (
           <div className="space-y-16">
@@ -66,6 +68,7 @@ function AboutContentSection({ section }: { section: AboutSection }) {
 export function AboutPage({ content }: AboutPageProps) {
   return (
     <main id="main-content" className="flex-1 bg-[var(--paper)]">
+      <AboutSectionHashSync />
       <section className="relative isolate min-h-[35rem] overflow-hidden bg-[var(--ink)] text-white lg:min-h-[calc(100svh-4rem)]">
         <Image
           src={content.heroImage}
@@ -94,19 +97,7 @@ export function AboutPage({ content }: AboutPageProps) {
         </div>
       </section>
 
-      <nav aria-label="About page sections" className="sticky top-[var(--header-offset)] z-30 hidden w-full border-b border-[var(--line)] bg-white shadow-[0_8px_24px_rgba(16,24,32,.06)] transition-[top] duration-[var(--header-transition-duration)] ease-[var(--header-transition-easing)] lg:block">
-        <div className="grid w-full grid-cols-5">
-          {content.tabs.map((tab) => (
-            <a
-              key={tab.target}
-              href={tab.target}
-              className="flex min-h-16 min-w-[14rem] items-center justify-center border-r border-[var(--line)] px-5 text-center text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50 hover:text-[var(--ink)] focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--accent)] lg:min-w-0 lg:text-base"
-            >
-              {tab.label}
-            </a>
-          ))}
-        </div>
-      </nav>
+      <AboutSectionNav tabs={content.tabs} />
 
       <div>
         {content.sections.map((section) =>

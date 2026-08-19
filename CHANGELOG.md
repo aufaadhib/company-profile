@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- Perbaiki link header, menu mobile, footer, dan CTA agar konsisten menuju route `/id` atau `/en`, termasuk anchor beranda.
+- Tambahkan aturan URL multi bahasa ke `AGENTS.md` dan dokumentasi design system.
+- Pisahkan route About bahasa Inggris menjadi `/en/about`; `/en/tentang-kami` dipertahankan sebagai redirect legacy.
+- Ganti seluruh aset visual Media & Informasi dengan delapan gambar lokal baru yang mengikuti tema berita dan tidak memakai ulang aset hero/About.
+- Ubah hero Media & Informasi menjadi Swiper tiga berita terbaru berdasarkan tanggal terbit, dengan autoplay 8 detik dan reduced-motion fallback.
+- Perbaiki inisialisasi autoplay Swiper pada Hero Home dan Media setelah preferensi reduced-motion selesai dibaca browser.
+- Pastikan autoplay hero Media & Informasi tidak berhenti hanya karena pointer berada di atas area hero.
+- Sesuaikan hero Media & Informasi menjadi full viewport `100svh` seperti hero Home.
+- Turunkan posisi copy hero Media & Informasi agar tidak bertabrakan dengan navbar pada desktop.
+
 Semua perubahan penting pada proyek ini dicatat di sini.
 
 ## [Unreleased]
@@ -26,3 +38,7 @@ Semua perubahan penting pada proyek ini dicatat di sini.
 - Memastikan konfigurasi autoplay timeline memakai durasi 25 detik sejak inisialisasi pertama.
 - Menggunakan enam aset `Our-Background` baru untuk seluruh gambar timeline latar belakang.
 - Menambahkan perilaku auto-hide header saat scroll turun dan menampilkannya kembali saat scroll naik.
+- Menambahkan halaman Media & Informasi bilingual dengan featured article, filter kategori, dan detail artikel statis.
+- Menambahkan hero berita dengan pagination clickable, keyboard navigation, dan CTA menuju detail setiap artikel.
+- Menambahkan struktur konten media yang siap dipetakan ke CMS pada fase berikutnya.
+- Memasang topbar pada seluruh route listing dan detail Media & Informasi.

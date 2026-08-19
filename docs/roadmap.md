@@ -18,6 +18,8 @@ Dokumen ini menyimpan milestone dan keputusan yang dapat berubah. Aturan impleme
 - **Completed** — Loading memakai skeleton scoped yang mengikuti geometry konten akhir dan tetap memiliki error state terpisah.
 - **Completed** — Prototype hero Afana memakai full-bleed media, topbar transparan dua tingkat, dan fade transition Swiper.
 - **Completed** — Latar belakang perusahaan memakai timeline Swiper bilingual dengan navigasi manual, autoplay 25 detik, dan progress rail.
+- **Completed** — Semua link lintas halaman memakai prefix locale aktif; hash-only link dibatasi untuk anchor pada halaman yang sama.
+- **Completed** — Route About dipetakan bilingual dengan `/id/tentang-kami` dan `/en/about`; URL Inggris lama `/en/tentang-kami` hanya menjadi redirect legacy.
 
 ## Planned
 
@@ -53,6 +55,13 @@ Dokumen ini menyimpan milestone dan keputusan yang dapat berubah. Aturan impleme
 - [ ] Lengkapi metadata, sitemap, robots, favicon, dan Open Graph dengan data yang disetujui.
 - [ ] Jalankan lint, typecheck, production build, dan smoke check route publik.
 - [ ] Periksa loading state, layout shift, hydration mismatch, dan motion jank pada production build.
+
+### 6. Media and information
+
+- [x] Tambahkan halaman listing Media & Informasi bilingual dengan featured article dan filter kategori ringan.
+- [x] Tambahkan halaman detail artikel bilingual dengan slug statis, metadata, dan related reading.
+- [x] Jadikan hero Media & Informasi sebagai Swiper tiga berita terbaru dengan autoplay 8 detik dan reduced-motion fallback.
+- [x] Gunakan struktur konten lokal yang siap dipetakan ke CMS tanpa menambahkan CMS pada prototype.
 
 ## Deferred
 

@@ -39,6 +39,9 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
         en: "/en",
       },
     },
+    icons: {
+      icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    },
   };
 }
 

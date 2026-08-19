@@ -110,7 +110,7 @@ export function AboutTimeline({ id, title, timeline }: AboutTimelineProps) {
       id={id}
       aria-label={title}
       data-reduced-motion={reducedMotion}
-      className="about-timeline relative isolate scroll-mt-20 overflow-hidden border-b border-[var(--line)] bg-[var(--ink)] text-white lg:scroll-mt-36"
+      className="about-timeline relative isolate scroll-mt-[calc(var(--header-offset)+5rem)] overflow-hidden border-b border-[var(--line)] bg-[var(--ink)] text-white lg:scroll-mt-[calc(var(--header-offset)+5rem)]"
     >
       <h2 className="sr-only">{title}</h2>
 

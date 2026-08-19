@@ -50,22 +50,22 @@ export const siteContent: Record<Locale, SiteContent> = {
           { label: "Peran Afana", href: "/tentang-kami#peran-afana" },
         ],
       },
-      { label: "Bisnis Afana", href: "#hero-media" },
-      { label: "Hubungan Investor", href: "#hero-copy" },
-      { label: "Media & Informasi", href: "#hero-media" },
-      { label: "Keberlanjutan", href: "#hero-copy" },
+      { label: "Bisnis Afana", href: "/#hero" },
+      { label: "Hubungan Investor", href: "/#hero-copy" },
+      { label: "Media & Informasi", href: "/media-informasi" },
+      { label: "Keberlanjutan", href: "/#hero-copy" },
     ],
     utilityNav: [
-      { label: "Karier", href: "#hero-copy" },
-      { label: "Kontak", href: "#hero-copy" },
+      { label: "Karier", href: "/#hero-copy" },
+      { label: "Kontak", href: "/#hero-copy" },
     ],
     mobileFooterNav: [
-      { label: "Pengadaan", href: "#hero-copy" },
-      { label: "Karier", href: "#hero-copy" },
-      { label: "Hubungi Kami", href: "#hero-copy" },
+      { label: "Pengadaan", href: "/#hero-copy" },
+      { label: "Karier", href: "/#hero-copy" },
+      { label: "Hubungi Kami", href: "/#hero-copy" },
     ],
     headerCtaLabel: "Mulai berkenalan",
-    headerCtaHref: "#hero-copy",
+    headerCtaHref: "/#hero-copy",
     languageLabel: "Bahasa",
     menuLabel: "Buka menu",
     closeLabel: "Tutup menu",
@@ -91,31 +91,31 @@ export const siteContent: Record<Locale, SiteContent> = {
     nav: [
       {
         label: "About Afana",
-        href: "/tentang-kami",
+        href: "/about",
         children: [
-          { label: "Afana Profile", href: "/tentang-kami#profil-afana" },
-          { label: "Our Background", href: "/tentang-kami#latar-belakang" },
-          { label: "Vision & Mission", href: "/tentang-kami#visi-misi" },
-          { label: "Solution Focus", href: "/tentang-kami#fokus-solusi" },
-          { label: "Afana's Role", href: "/tentang-kami#peran-afana" },
+          { label: "Afana Profile", href: "/about#profil-afana" },
+          { label: "Our Background", href: "/about#latar-belakang" },
+          { label: "Vision & Mission", href: "/about#visi-misi" },
+          { label: "Solution Focus", href: "/about#fokus-solusi" },
+          { label: "Afana's Role", href: "/about#peran-afana" },
         ],
       },
-      { label: "Afana Business", href: "#hero-media" },
-      { label: "Investor Relations", href: "#hero-copy" },
-      { label: "Media & Information", href: "#hero-media" },
-      { label: "Sustainability", href: "#hero-copy" },
+      { label: "Afana Business", href: "/#hero" },
+      { label: "Investor Relations", href: "/#hero-copy" },
+      { label: "Media & Information", href: "/media-information" },
+      { label: "Sustainability", href: "/#hero-copy" },
     ],
     utilityNav: [
-      { label: "Careers", href: "#hero-copy" },
-      { label: "Contact", href: "#hero-copy" },
+      { label: "Careers", href: "/#hero-copy" },
+      { label: "Contact", href: "/#hero-copy" },
     ],
     mobileFooterNav: [
-      { label: "Procurement", href: "#hero-copy" },
-      { label: "Careers", href: "#hero-copy" },
-      { label: "Contact Us", href: "#hero-copy" },
+      { label: "Procurement", href: "/#hero-copy" },
+      { label: "Careers", href: "/#hero-copy" },
+      { label: "Contact Us", href: "/#hero-copy" },
     ],
     headerCtaLabel: "Meet Afana",
-    headerCtaHref: "#hero-copy",
+    headerCtaHref: "/#hero-copy",
     languageLabel: "Language",
     menuLabel: "Open menu",
     closeLabel: "Close menu",
@@ -141,4 +141,22 @@ export const siteContent: Record<Locale, SiteContent> = {
 
 export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
+}
+
+export function getLocaleHref(href: string, locale: Locale) {
+  return href.startsWith("/") ? `/${locale}${href}` : href;
+}
+
+export function getOtherLocaleHref(pathname: string, locale: Locale) {
+  const otherLocale: Locale = locale === "id" ? "en" : "id";
+  const localePath = pathname.replace(/^\/(id|en)(?=\/|$)/, "") || "/";
+  const localizedPath = localePath.replace(
+    /^\/media-(informasi|information)(?=\/|$)/,
+    otherLocale === "id" ? "/media-informasi" : "/media-information",
+  ).replace(
+    /^\/(tentang-kami|about)(?=\/|$)/,
+    otherLocale === "id" ? "/tentang-kami" : "/about",
+  );
+
+  return `/${otherLocale}${localizedPath === "/" ? "" : localizedPath}`;
 }

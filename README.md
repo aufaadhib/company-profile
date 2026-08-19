@@ -21,6 +21,8 @@ npm run build
 
 ## Documentation
 
+- [docs/implementation-plan.md](docs/implementation-plan.md) - rencana implementasi dan handoff SOL ke LUNA.
+
 - [AGENTS.md](AGENTS.md) — aturan implementasi untuk agent.
 - [docs/design-system.md](docs/design-system.md) — arah visual dan token design system.
 - [docs/security.md](docs/security.md) — batasan security, privacy, dan future CMS.

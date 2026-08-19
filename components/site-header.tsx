@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { MouseEvent } from "react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
+import { scrollToAboutSection } from "@/components/about-section-navigation";
+import { getLocaleHref, getOtherLocaleHref } from "@/content/site-content";
 import type { Locale, SiteContent } from "@/content/site-content";
 
 type SiteHeaderProps = {
@@ -11,10 +14,6 @@ type SiteHeaderProps = {
   content: SiteContent;
   solid?: boolean;
 };
-
-function resolveNavHref(href: string, locale: Locale) {
-  return href.startsWith("/") ? `/${locale}${href}` : href;
-}
 
 function AfanaMark() {
   return (
@@ -61,12 +60,22 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(solid);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const headerRef = useRef<HTMLElement>(null);
   const lastScrollY = useRef(0);
   const pathname = usePathname();
   const otherLocale: Locale = locale === "id" ? "en" : "id";
   const otherLabel = otherLocale === "id" ? "ID" : "EN";
-  const localePath = pathname.replace(/^\/(id|en)(?=\/|$)/, "") || "/";
-  const otherLocaleHref = `/${otherLocale}${localePath === "/" ? "" : localePath}`;
+  const otherLocaleHref = getOtherLocaleHref(pathname, locale);
+
+  function handleSectionLink(event: MouseEvent<HTMLAnchorElement>, href: string) {
+    const [targetPath, hash] = href.split("#");
+    if (!hash || targetPath !== pathname) {
+      return;
+    }
+
+    event.preventDefault();
+    scrollToAboutSection(`#${hash}`);
+  }
 
   useEffect(() => {
     function handleScroll() {
@@ -96,12 +105,25 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
   }, [isOpen, solid]);
 
   useLayoutEffect(() => {
-    document.documentElement.style.setProperty("--header-offset", isHeaderVisible || isOpen ? "5rem" : "0px");
+    const header = headerRef.current;
+    if (!header) {
+      return;
+    }
+
+    const updateHeaderOffset = () => {
+      const offset = isHeaderVisible || isOpen ? header.getBoundingClientRect().height : 0;
+      document.documentElement.style.setProperty("--header-offset", `${offset}px`);
+    };
+
+    updateHeaderOffset();
+    const resizeObserver = new ResizeObserver(updateHeaderOffset);
+    resizeObserver.observe(header);
 
     return () => {
+      resizeObserver.disconnect();
       document.documentElement.style.removeProperty("--header-offset");
     };
-  }, [isHeaderVisible, isOpen]);
+  }, [isHeaderVisible, isOpen, isScrolled]);
 
   const headerTone = isScrolled ? "text-[var(--ink)]" : "text-white";
   const interactiveTone = isScrolled ? "hover:text-[var(--ink)]" : "hover:text-white";
@@ -109,7 +131,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
 
   return (
     <>
-    <header className={`site-header fixed inset-x-0 top-0 ${isOpen ? "z-[70]" : "z-50"} border-b transition-[translate,background-color,box-shadow,color] duration-[var(--header-transition-duration)] ease-[var(--header-transition-easing)] ${isHeaderShown ? "translate-y-0" : "-translate-y-full focus-within:translate-y-0"} ${isScrolled ? "border-[var(--line)] bg-white/95 shadow-[0_8px_24px_rgba(16,24,32,.08)] backdrop-blur-md" : "border-transparent bg-transparent"} ${headerTone}`}>
+    <header ref={headerRef} className={`site-header fixed inset-x-0 top-0 ${isOpen ? "z-[70]" : "z-50"} border-b transition-[translate,background-color,box-shadow,color] duration-[var(--header-transition-duration)] ease-[var(--header-transition-easing)] ${isHeaderShown ? "translate-y-0" : "-translate-y-full focus-within:translate-y-0"} ${isScrolled ? "border-[var(--line)] bg-white/95 shadow-[0_8px_24px_rgba(16,24,32,.08)] backdrop-blur-md" : "border-transparent bg-transparent"} ${headerTone}`}>
       <div className={`relative z-[70] mx-auto flex w-full max-w-[1440px] items-center justify-between gap-8 px-5 transition-[min-height] duration-[var(--header-transition-duration)] ease-[var(--header-transition-easing)] sm:px-8 lg:px-12 ${isScrolled ? "min-h-20" : "min-h-24 lg:min-h-32"}`}>
         <Link
           href={`/${locale}`}
@@ -123,7 +145,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
         <div className={`hidden flex-col items-end lg:flex ${isScrolled ? "gap-0" : "gap-5"}`}>
           <nav aria-label="Utility navigation" className={`flex items-center gap-7 text-sm font-medium transition-opacity ${isScrolled ? "pointer-events-none absolute opacity-0" : "text-white/90 opacity-100"}`}>
             {content.utilityNav.map((item) => (
-              <Link key={item.label} href={item.href} className={`transition-colors ${interactiveTone} focus-visible:outline-2 focus-visible:outline-offset-4 ${isScrolled ? "focus-visible:outline-[var(--ink)]" : "focus-visible:outline-white"}`}>
+              <Link key={item.label} href={getLocaleHref(item.href, locale)} className={`transition-colors ${interactiveTone} focus-visible:outline-2 focus-visible:outline-offset-4 ${isScrolled ? "focus-visible:outline-[var(--ink)]" : "focus-visible:outline-white"}`}>
                 {item.label}
               </Link>
             ))}
@@ -131,7 +153,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
               {content.languageLabel === "Bahasa" ? "ID" : "EN"}
               <span className="size-2 rounded-full bg-[var(--accent)]" aria-hidden="true" />
             </Link>
-            <Link href={content.headerCtaHref} className="rounded-full border border-white/80 px-5 py-2.5 text-xs font-semibold transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+            <Link href={getLocaleHref(content.headerCtaHref, locale)} className="rounded-full border border-white/80 px-5 py-2.5 text-xs font-semibold transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
               {content.headerCtaLabel}
             </Link>
           </nav>
@@ -143,7 +165,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
 
               if (!hasChildren) {
                 return (
-                    <Link key={item.label} href={resolveNavHref(item.href, locale)} className={`whitespace-nowrap transition-colors ${isScrolled ? "hover:text-black/65" : "hover:text-white/70"} focus-visible:outline-2 focus-visible:outline-offset-4 ${isScrolled ? "focus-visible:outline-[var(--ink)]" : "focus-visible:outline-white"}`}>
+                    <Link key={item.label} href={getLocaleHref(item.href, locale)} className={`whitespace-nowrap transition-colors ${isScrolled ? "hover:text-black/65" : "hover:text-white/70"} focus-visible:outline-2 focus-visible:outline-offset-4 ${isScrolled ? "focus-visible:outline-[var(--ink)]" : "focus-visible:outline-white"}`}>
                     {item.label}
                   </Link>
                 );
@@ -166,10 +188,13 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
                       {item.children?.map((child) => (
                         <Link
                           key={child.label}
-                          href={resolveNavHref(child.href, locale)}
+                          href={getLocaleHref(child.href, locale)}
                           role="menuitem"
                           className="flex min-h-11 items-center rounded-xl px-4 text-[0.95rem] font-normal text-slate-500 transition-colors hover:bg-slate-50 hover:text-[var(--ink)] focus-visible:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--accent)]"
-                          onClick={() => setOpenDropdown(null)}
+                          onClick={(event) => {
+                            handleSectionLink(event, getLocaleHref(child.href, locale));
+                            setOpenDropdown(null);
+                          }}
                         >
                           {child.label}
                         </Link>
@@ -218,7 +243,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
 
             if (!hasChildren) {
               return (
-                <Link key={item.label} href={resolveNavHref(item.href, locale)} className="flex min-h-14 items-center justify-between border-b border-white/15 text-base font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
+                <Link key={item.label} href={getLocaleHref(item.href, locale)} className="flex min-h-14 items-center justify-between border-b border-white/15 text-base font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
                   {item.label}
                   <ChevronIcon isOpen={false} />
                 </Link>
@@ -239,7 +264,10 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
                 {isDropdownOpen ? (
                   <div className="-mx-1 mb-3 px-1 py-1">
                     {item.children?.map((child) => (
-                      <Link key={child.label} href={resolveNavHref(child.href, locale)} className="flex min-h-11 items-center px-3 text-sm font-normal text-white/65 transition-[color,transform] duration-200 hover:translate-x-1 hover:text-[var(--accent)] focus-visible:translate-x-1 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
+                      <Link key={child.label} href={getLocaleHref(child.href, locale)} className="flex min-h-11 items-center px-3 text-sm font-normal text-white/65 transition-[color,transform] duration-200 hover:translate-x-1 hover:text-[var(--accent)] focus-visible:translate-x-1 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-white" onClick={(event) => {
+                        handleSectionLink(event, getLocaleHref(child.href, locale));
+                        setIsOpen(false);
+                      }}>
                         {child.label}
                       </Link>
                     ))}
@@ -252,12 +280,12 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
           <div className="mt-8 border-t border-white/15 pt-5">
             <nav aria-label="Mobile utility navigation" className="flex items-center justify-center gap-6 text-xs font-medium text-white/85">
               {content.mobileFooterNav.map((item) => (
-                <Link key={item.label} href={item.href} className="min-h-11 flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
+                <Link key={item.label} href={getLocaleHref(item.href, locale)} className="min-h-11 flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
                   {item.label}
                 </Link>
               ))}
             </nav>
-            <Link href={content.headerCtaHref} className="mx-auto mt-3 flex min-h-11 w-fit items-center rounded-full border border-white/80 px-5 text-xs font-semibold text-white transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
+            <Link href={getLocaleHref(content.headerCtaHref, locale)} className="mx-auto mt-3 flex min-h-11 w-fit items-center rounded-full border border-white/80 px-5 text-xs font-semibold text-white transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
               {content.headerCtaLabel}
             </Link>
           </div>
