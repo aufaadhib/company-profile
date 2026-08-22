@@ -99,6 +99,7 @@ Setelah hero, Home membentuk alur corporate editorial yang menghubungkan profil,
 - Anchor `#bisnis-afana` menampilkan ruang solusi dengan tab Fokus Sistem dan Pendekatan Kerja. Setiap tab berisi empat kartu interaktif: gambar dan judul di depan, lalu ringkasan teknis setelah kartu berputar.
 - Ukuran visual kartu solusi diperkecil menjadi 75% dari lebar grid awal pada mobile, tablet, dan desktop; card tetap menempel ke kiri dengan gap desktop yang rapat dan whitespace di sisi kanan, sementara rasio kartu tetap portrait agar hierarki gambar dan judul terjaga.
 - Fine pointer membalik kartu saat hover. Keyboard memakai Enter/Space dan perangkat sentuh memakai tap untuk mengunci atau mengembalikan kartu; nama tindakan dan ringkasan tetap tersedia bagi screen reader.
+- Permukaan depan card tidak memakai ikon flip dekoratif; affordance tetap tersedia melalui hover, tap, keyboard, dan accessible label.
 - Flip memakai satu bidang visual yang menutup ke 90 derajat, menukar konten di titik tengah, lalu membuka kembali. Permukaan depan dan belakang tidak dirender bertumpuk agar tidak menimbulkan artefak pada frame transisi.
 - Pergantian tab memakai hinge transition CSS berurutan. Reduced motion meniadakan gerakan besar; mobile memakai horizontal scroll-snap native, medium memakai dua kolom, dan desktop empat kolom.
 - Section `#cara-kerja-afana` menampilkan empat langkah dalam rail teknis: memahami kondisi, menstabilkan daya, melindungi perangkat, dan memperpanjang nilai aset.

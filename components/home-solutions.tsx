@@ -208,11 +208,6 @@ function SolutionCard({
               className="object-cover"
             />
             <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,24,32,.08)_20%,rgba(16,24,32,.88)_100%)]" />
-            <span className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border border-white/55 bg-[var(--ink)]/25 text-white backdrop-blur-sm">
-              <svg className="h-5 w-5" viewBox="0 0 20 20" fill="none">
-                <path d="M15.5 7.5A6 6 0 0 0 5 5.2L3.5 7M4.5 12.5A6 6 0 0 0 15 14.8l1.5-1.8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
             <span className="absolute inset-0 flex flex-col justify-end p-6 sm:p-7">
               <span className="max-w-[16rem] font-display text-2xl font-semibold leading-tight tracking-[-0.035em] text-balance">{card.title}</span>
             </span>
