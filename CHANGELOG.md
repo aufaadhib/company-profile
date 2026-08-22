@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Hapus Karier/Careers dari navigasi publik dan pilihan topik form Contact pada kedua bahasa.
+- Tambahkan halaman FAQ bilingual dengan Search Desk, filter/pencarian GET, accordion native, empty state, CTA Contact, metadata, dan JSON-LD published-only.
+- Tambahkan CMS FAQ dengan kategori bilingual, revision immutable, optimistic locking, workflow draft/review/publish, soft archive/restore, manual ordering, audit log, serta hak akses Editor/Admin.
+- Tambahkan seed idempotent berisi lima kategori dan 20 FAQ bilingual yang langsung dipublish tanpa menimpa FAQ hasil impor sebelumnya.
 - Lengkapi Home bilingual setelah hero dengan teaser profil, rail cara kerja, Sustainability, tiga Media terbaru dari CMS, CTA Contact, dan anchor Bisnis Afana yang nyata.
 - Tambahkan section Bisnis Afana dua tab dengan kartu media Fokus Sistem dan Pendekatan Kerja, hinge transition CSS, serta scroll-snap native pada mobile.
 - Ubah kartu Bisnis Afana menjadi kartu flip saat hover yang dapat dikunci melalui tap atau keyboard untuk menampilkan ringkasan.

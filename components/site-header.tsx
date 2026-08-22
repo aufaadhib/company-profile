@@ -291,7 +291,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
           })}
           </nav>
           <div className="mt-8 border-t border-white/15 pt-5">
-            <nav aria-label="Mobile utility navigation" className="flex items-center justify-center gap-6 text-xs font-medium text-white/85">
+            <nav aria-label="Mobile utility navigation" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs font-medium text-white/85">
               {content.mobileFooterNav.map((item) => (
                 <Link key={item.label} href={getLocaleHref(item.href, locale)} className="min-h-11 flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
                   {item.label}

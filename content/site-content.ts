@@ -55,12 +55,12 @@ export const siteContent: Record<Locale, SiteContent> = {
       { label: "Keberlanjutan", href: "/keberlanjutan" },
     ],
     utilityNav: [
-      { label: "Karier", href: "/#hero-copy" },
+      { label: "FAQ", href: "/faq" },
       { label: "Kontak", href: "/kontak" },
     ],
     mobileFooterNav: [
+      { label: "FAQ", href: "/faq" },
       { label: "Pengadaan", href: "/#hero-copy" },
-      { label: "Karier", href: "/#hero-copy" },
       { label: "Hubungi Kami", href: "/kontak" },
     ],
     headerCtaLabel: "Mulai berkenalan",
@@ -104,12 +104,12 @@ export const siteContent: Record<Locale, SiteContent> = {
       { label: "Sustainability", href: "/sustainability" },
     ],
     utilityNav: [
-      { label: "Careers", href: "/#hero-copy" },
+      { label: "FAQ", href: "/faq" },
       { label: "Contact", href: "/contact" },
     ],
     mobileFooterNav: [
+      { label: "FAQ", href: "/faq" },
       { label: "Procurement", href: "/#hero-copy" },
-      { label: "Careers", href: "/#hero-copy" },
       { label: "Contact Us", href: "/contact" },
     ],
     headerCtaLabel: "Meet Afana",

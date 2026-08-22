@@ -13,10 +13,12 @@
     "lint": "eslint",
     "test:contact": "node --test tests/contact-validation.test.ts",
     "test:cms": "node --test tests/cms-validation.test.ts",
+    "test:faq": "node --test tests/faq-validation.test.ts",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:seed:media": "tsx scripts/seed-media-content.ts",
+    "db:seed:faq": "tsx scripts/seed-faq-content.ts",
     "db:studio": "prisma studio",
     "cms:create-admin": "npx auth@1.7.1 create-admin --config better-auth.cli.ts",
     "postinstall": "prisma generate"

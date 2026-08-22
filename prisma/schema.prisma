@@ -28,6 +28,11 @@ enum MediaWorkflowStatus {
   IN_REVIEW
 }
 
+enum FaqWorkflowStatus {
+  DRAFT
+  IN_REVIEW
+}
+
 enum MediaAssetSource {
   LOCAL
   BLOB
@@ -52,6 +57,12 @@ model User {
   publishedMediaArticles MediaArticle[] @relation("MediaArticlePublisher")
   mediaRevisions        MediaRevision[]
   mediaAssets           MediaAsset[]
+  createdFaqItems       FaqItem[]       @relation("FaqItemCreator")
+  updatedFaqItems       FaqItem[]       @relation("FaqItemUpdater")
+  publishedFaqItems     FaqItem[]       @relation("FaqItemPublisher")
+  faqRevisions          FaqRevision[]
+  createdFaqCategories  FaqCategory[]   @relation("FaqCategoryCreator")
+  updatedFaqCategories  FaqCategory[]   @relation("FaqCategoryUpdater")
   auditLogs             AuditLog[]
 
   @@map("user")
@@ -166,6 +177,73 @@ model MediaAsset {
   revisions    MediaRevision[]
 
   @@index([createdById, createdAt])
+}
+
+model FaqCategory {
+  id          String        @id @default(uuid()) @db.Uuid
+  slug        String        @unique @db.VarChar(100)
+  titleId     String        @db.VarChar(100)
+  titleEn     String        @db.VarChar(100)
+  sortOrder   Int           @default(0)
+  lockVersion Int           @default(0)
+  archivedAt  DateTime?
+  createdById String?
+  updatedById String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdBy   User?         @relation("FaqCategoryCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy   User?         @relation("FaqCategoryUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+  items       FaqItem[]
+  revisions   FaqRevision[]
+
+  @@index([archivedAt, sortOrder])
+}
+
+model FaqItem {
+  id                  String            @id @default(uuid()) @db.Uuid
+  categoryId          String            @db.Uuid
+  sortOrder           Int               @default(0)
+  workflowStatus      FaqWorkflowStatus @default(DRAFT)
+  draftRevisionId     String?           @unique @db.Uuid
+  publishedRevisionId String?           @unique @db.Uuid
+  lockVersion         Int               @default(0)
+  archivedAt          DateTime?
+  createdById         String?
+  updatedById         String?
+  publishedById       String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  category            FaqCategory       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  createdBy           User?             @relation("FaqItemCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy           User?             @relation("FaqItemUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+  publishedBy         User?             @relation("FaqItemPublisher", fields: [publishedById], references: [id], onDelete: SetNull)
+  revisions           FaqRevision[]     @relation("FaqItemRevisions")
+  draftRevision       FaqRevision?      @relation("FaqDraftRevision", fields: [draftRevisionId], references: [id], onDelete: SetNull)
+  publishedRevision   FaqRevision?      @relation("FaqPublishedRevision", fields: [publishedRevisionId], references: [id], onDelete: SetNull)
+
+  @@index([categoryId, sortOrder])
+  @@index([workflowStatus, updatedAt])
+  @@index([archivedAt])
+  @@index([publishedRevisionId, archivedAt])
+}
+
+model FaqRevision {
+  id             String       @id @default(uuid()) @db.Uuid
+  faqItemId      String       @db.Uuid
+  categoryId     String       @db.Uuid
+  revisionNumber Int
+  payload        Json
+  createdById    String?
+  createdAt      DateTime     @default(now())
+  faqItem        FaqItem      @relation("FaqItemRevisions", fields: [faqItemId], references: [id], onDelete: Cascade)
+  category       FaqCategory  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  createdBy      User?        @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  draftFor       FaqItem?     @relation("FaqDraftRevision")
+  publishedFor   FaqItem?     @relation("FaqPublishedRevision")
+
+  @@unique([faqItemId, revisionNumber])
+  @@index([faqItemId, createdAt])
+  @@index([categoryId])
 }
 
 model AuditLog {

@@ -8,7 +8,7 @@ web
 
 ## Users
 
-Pengunjung berbahasa Indonesia dan Inggris yang ingin memahami Afana atau menyampaikan pertanyaan umum, kebutuhan solusi kelistrikan, peluang kemitraan, pengadaan, karier, maupun kebutuhan media.
+Pengunjung berbahasa Indonesia dan Inggris yang ingin memahami Afana atau menyampaikan pertanyaan umum, kebutuhan solusi kelistrikan, peluang kemitraan, pengadaan, maupun kebutuhan media.
 
 ## Product Purpose
 

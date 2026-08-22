@@ -23,6 +23,7 @@ Dokumen ini menyimpan milestone dan keputusan yang dapat berubah. Aturan impleme
 - **Completed** — Contact memakai `/id/kontak` dan `/en/contact`; pesan disimpan pada Neon PostgreSQL, dilindungi Turnstile/rate limit, diberi notifikasi Resend, dan memiliki retensi 12 bulan.
 - **Completed** — Admin utama memiliki Contact Control untuk inbox, read/archive, retry email, Auto Email, dan kanal publik; Editor tidak memiliki akses ke data Contact.
 - **Completed** — CMS Media memakai Better Auth, Admin/Editor, revision draft/review/publish, Vercel Blob, dan artikel publik bilingual dari Neon PostgreSQL.
+- **Completed** — FAQ memakai Search Desk bilingual, pencarian/filter GET, accordion native, serta CMS revision draft/review/publish dengan kategori dan urutan Admin-only.
 
 - **Completed** — Home membentuk alur lengkap dari hero menuju profil, cara kerja, Sustainability, Media terbaru dari CMS, dan Contact dengan anchor bisnis bilingual.
 
@@ -98,6 +99,14 @@ Dokumen ini menyimpan milestone dan keputusan yang dapat berubah. Aturan impleme
 - [x] Arahkan navigasi Bisnis Afana ke section `#bisnis-afana` yang nyata.
 - [x] Tambahkan tab Fokus Sistem dan Pendekatan Kerja dengan kartu media single-plane, hover/tap/keyboard flip, scroll-snap mobile, dan hinge transition yang menghormati reduced motion.
 - [x] Stream Media terbaru melalui Suspense lokal tanpa menahan konten Home yang statis.
+
+### 11. FAQ
+
+- [x] Tambahkan route `/id/faq` dan `/en/faq` dengan metadata, alternate locale, Search Desk, empty/no-result state, dan CTA Contact.
+- [x] Tambahkan pencarian serta filter kategori berbasis GET dan accordion native yang dapat digunakan dengan keyboard.
+- [x] Tambahkan model kategori, item, dan revision immutable dengan optimistic locking, audit log, soft archive, manual ordering, dan cache published.
+- [x] Tambahkan halaman Admin untuk CRUD draft FAQ dan pengelolaan kategori sesuai hak akses Editor/Admin.
+- [x] Isi lima kategori dan 20 FAQ bilingual melalui seed idempotent setelah pengguna memberikan persetujuan konten bebas.
 
 ## Deferred
 

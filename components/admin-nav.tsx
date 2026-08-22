@@ -10,6 +10,7 @@ import type { CmsRole } from "@/lib/auth-permissions";
 const navItems = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/media", label: "Media" },
+  { href: "/admin/faq", label: "FAQ" },
   { href: "/admin/contact", label: "Kontak", adminOnly: true },
   { href: "/admin/users", label: "Pengguna", adminOnly: true },
 ];

@@ -156,6 +156,17 @@ Halaman Contact memakai route `/id/kontak` dan `/en/contact` dengan mode persuad
 - Tanpa konfigurasi Turnstile, tombol submit nonaktif dengan penjelasan yang jelas; kanal langsung tetap dapat dipakai.
 - Nilai awal yang disetujui: `info@afana.id`, `081331096250`, dan Banyuwangi. Admin dapat memperbarui atau menyembunyikan kanal tersebut; jangan menambahkan alamat rinci, peta, jam operasional, atau waktu respons tanpa input pengguna.
 
+## FAQ
+
+Halaman FAQ memakai route bilingual `/id/faq` dan `/en/faq` dengan pola Search Desk.
+
+- Hero interior menggunakan tinggi `60svh` dan minimum `512px`, dengan connection grid teknis sebagai signature visual tanpa aset foto tambahan.
+- Pencarian dan filter kategori memakai query GET `q` dan `category`, sehingga state dapat dibagikan, dibuka ulang, dan tetap berfungsi tanpa Client Component.
+- Daftar pertanyaan menggunakan accordion native `details/summary`; pertanyaan, jawaban, filter, empty state, dan CTA Contact tersedia setara dalam Indonesia dan Inggris.
+- Desktop memakai sidebar pencarian sticky dan ledger FAQ di kanan. Mobile menyusun pencarian, filter, lalu pertanyaan secara vertikal tanpa horizontal overflow.
+- JSON-LD `FAQPage` hanya ditampilkan pada URL dasar tanpa filter dan hanya berisi revision published dari kategori aktif.
+- Konten FAQ berasal dari CMS revision immutable. Seed awal berisi 20 FAQ bilingual yang disetujui pengguna, dengan jawaban konservatif tanpa klaim harga, SLA, sertifikasi, atau spesifikasi yang belum dikonfirmasi.
+
 ## Halaman About
 
 Halaman About menyajikan profil Afana melalui urutan informasi yang jelas:
@@ -222,5 +233,5 @@ Footer menggunakan permukaan `--ink` dengan teks putih dan struktur kolom inform
 
 - Gunakan Server Component secara default; Client Component hanya untuk scroll state, browser API, Swiper, atau interaksi menu.
 - Gunakan native CSS dan browser behavior sebelum menambah dependency.
-- Database digunakan untuk form Contact dan CMS Media yang telah disetujui. Jangan memperluas CMS ke halaman lain tanpa kebutuhan produk yang jelas.
+- Database digunakan untuk form Contact, CMS Media, dan CMS FAQ yang telah disetujui. Jangan memperluas CMS ke halaman lain tanpa kebutuhan produk yang jelas.
 - Setiap perubahan visual yang mengubah token, breakpoint, motion, atau hierarchy harus diperbarui di dokumen ini dan diverifikasi pada breakpoint utama.

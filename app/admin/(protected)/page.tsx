@@ -4,6 +4,7 @@ import { AdminStatus } from "@/components/admin-status";
 import { getCmsUser } from "@/lib/cms-auth";
 import { getCmsDashboardData } from "@/lib/cms-service";
 import { getContactDashboardCounts } from "@/lib/contact-service";
+import { getCmsFaqItems } from "@/lib/faq-service";
 
 const activityLabels: Record<string, string> = {
   ARTICLE_CREATED: "membuat artikel",
@@ -26,6 +27,19 @@ const activityLabels: Record<string, string> = {
   CONTACT_NOTIFICATION_RETRY_FAILED: "gagal mengirim ulang notifikasi Contact",
   CONTACT_TEST_EMAIL_SENT: "mengirim email uji Contact",
   CONTACT_TEST_EMAIL_FAILED: "gagal mengirim email uji Contact",
+  FAQ_CREATED: "membuat FAQ",
+  FAQ_DRAFT_SAVED: "menyimpan draft FAQ",
+  FAQ_REVIEW_REQUESTED: "mengajukan review FAQ",
+  FAQ_PUBLISHED: "menerbitkan FAQ",
+  FAQ_UNPUBLISHED: "membatalkan publikasi FAQ",
+  FAQ_ARCHIVED: "mengarsipkan FAQ",
+  FAQ_RESTORED: "memulihkan FAQ",
+  FAQ_REORDERED: "mengubah urutan FAQ",
+  FAQ_CATEGORY_CREATED: "membuat kategori FAQ",
+  FAQ_CATEGORY_UPDATED: "memperbarui kategori FAQ",
+  FAQ_CATEGORY_ARCHIVED: "menonaktifkan kategori FAQ",
+  FAQ_CATEGORY_RESTORED: "mengaktifkan kategori FAQ",
+  FAQ_CATEGORY_REORDERED: "mengubah urutan kategori FAQ",
 };
 
 function formatDate(value: string) {
@@ -33,13 +47,15 @@ function formatDate(value: string) {
 }
 
 export default async function AdminDashboardPage() {
-  const [data, user] = await Promise.all([getCmsDashboardData(), getCmsUser()]);
+  const [data, user, faqItems] = await Promise.all([getCmsDashboardData(), getCmsUser(), getCmsFaqItems()]);
   const contactCounts = user?.role === "admin" ? await getContactDashboardCounts() : null;
   const metrics: Array<[string, number]> = [
     ["Menunggu review", data.counts.review],
     ["Draft aktif", data.counts.draft],
     ["Published", data.counts.published],
     ["Editor aktif", data.editorCount],
+    ["FAQ menunggu review", faqItems.filter((item) => item.status === "review").length],
+    ["FAQ published", faqItems.filter((item) => item.status === "published" || item.status === "changes").length],
   ];
   if (contactCounts) metrics.push(["Pesan belum dibaca", contactCounts.unread], ["Email Contact gagal", contactCounts.failed]);
 

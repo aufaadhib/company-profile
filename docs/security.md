@@ -2,7 +2,7 @@
 
 ## Current Scope
 
-Proyek memakai dua backend terbatas: form Contact dan CMS Media internal. Pesan Contact disimpan pada Neon PostgreSQL, sedangkan artikel Media memakai revision immutable, Better Auth, role Admin/Editor, dan Vercel Blob.
+Proyek memakai backend terbatas untuk form Contact, CMS Media, dan CMS FAQ internal. Pesan Contact disimpan pada Neon PostgreSQL, sedangkan Media dan FAQ memakai revision immutable, Better Auth, serta role Admin/Editor. Vercel Blob hanya digunakan oleh Media.
 
 ## Permanent Rules
 
@@ -35,3 +35,13 @@ Proyek memakai dua backend terbatas: form Contact dan CMS Media internal. Pesan 
 6. Upload Blob membatasi JPEG, PNG, WebP, dan AVIF maksimal 8 MB. Server memverifikasi ulang metadata Blob sebelum menyimpan asset record.
 7. Password reset dan undangan berlaku satu jam, dikirim melalui Resend, dan reset mencabut session lain.
 8. CMS tidak mengelola halaman statis lain, analytics, komentar, atau media deletion.
+
+## CMS FAQ Boundary
+
+1. Editor dapat membuat dan mengubah draft FAQ bilingual serta meminta review. Hanya Admin utama yang dapat publish, unpublish, reorder, archive, restore, dan mengelola kategori.
+2. Mutation FAQ selalu memvalidasi session dan role di server; kontrol yang disembunyikan di UI bukan batas authorization.
+3. Pertanyaan dan jawaban disimpan sebagai plain text dalam revision immutable. Website publik hanya membaca pointer published dari FAQ non-archived dalam kategori aktif.
+4. Publication mensyaratkan kategori aktif serta pertanyaan dan jawaban lengkap dalam bahasa Indonesia dan Inggris.
+5. Optimistic locking dan transaksi mencegah overwrite diam-diam. Perubahan workflow, urutan, dan kategori dicatat pada audit log.
+6. Archive adalah soft delete yang dapat dipulihkan. Menonaktifkan kategori langsung menyembunyikan seluruh FAQ published di dalamnya.
+7. FAQ tidak menerima rich text, HTML, gambar, attachment, atau endpoint preview publik.

@@ -1,6 +1,6 @@
 # Company Profile
 
-Company profile berbasis Next.js 16 App Router, TypeScript strict, Tailwind CSS v4, form kontak PostgreSQL, serta CMS Media internal.
+Company profile berbasis Next.js 16 App Router, TypeScript strict, Tailwind CSS v4, form kontak PostgreSQL, serta CMS Media dan FAQ internal.
 
 ## Development
 
@@ -33,11 +33,11 @@ Route kontak:
 
 Admin utama dapat membuka `/admin/contact` untuk membaca dan mengarsipkan submission, mengirim ulang notifikasi gagal atau dilewati, serta mengatur Auto Email dan kanal publik. Editor tidak memiliki akses ke data Contact.
 
-## CMS Media setup
+## CMS Media dan FAQ setup
 
 1. Tambahkan `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY`, `CMS_OWNER_EMAIL`, `CMS_OWNER_NAME`, `RESEND_FROM_EMAIL`, `RESEND_FROM_NAME`, dan `BLOB_READ_WRITE_TOKEN` ke `.env.local` serta Vercel.
 2. Buat Public Vercel Blob store agar gambar published dapat ditampilkan oleh `next/image`.
-3. Jalankan `npm run db:deploy` dan `npm run db:seed:media`.
+3. Jalankan `npm run db:deploy` untuk schema Contact, Media, dan FAQ, lalu `npm run db:seed:media` dan `npm run db:seed:faq` untuk konten awal.
 4. Buat satu Admin utama dengan email yang sama seperti `CMS_OWNER_EMAIL`:
 
 ```bash
@@ -48,12 +48,15 @@ npm run cms:create-admin -- --email owner@example.com --name "Afana Owner" --rol
 
 Set `BETTER_AUTH_URL` ke origin deployment pada setiap environment. Seed Media aman dijalankan ulang dan tidak menggandakan slug.
 
+FAQ dikelola dari `/admin/faq`. Seed FAQ bersifat idempotent dan menerbitkan 20 FAQ bilingual dalam lima kategori; FAQ yang sudah diimpor tidak ditimpa saat seed dijalankan ulang.
+
 ## Verification
 
 ```bash
 npm run db:generate
 npm run test:contact
 npm run test:cms
+npm run test:faq
 npm run lint
 npx tsc --noEmit
 npm run build

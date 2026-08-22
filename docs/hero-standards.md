@@ -36,6 +36,7 @@ Seluruh hero memakai skala judul yang sama. Hero title memakai `text-wrap: balan
 | About | `60svh`, minimum `512px` | Interior landing lebih ringkas agar konten berikutnya cepat terlihat. |
 | Sustainability | `60svh`, minimum `512px` | Menghindari pengulangan komposisi full-screen dan mempercepat transisi ke isi. |
 | Contact | `60svh`, minimum `512px` | Interior conversion page dengan transisi cepat menuju kanal dan form. |
+| FAQ | `60svh`, minimum `512px` | Interior information desk yang segera mengantar pembaca ke pencarian dan accordion. |
 | Media article | Content-led, minimum `60svh` | Judul artikel dapat memanjang tanpa terpotong. |
 
 ## Responsive rules
