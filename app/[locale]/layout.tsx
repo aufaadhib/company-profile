@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   const safeLocale: Locale = isLocale(locale) ? locale : "id";
 
   return {
-    title: `${safeLocale === "id" ? "Ruang untuk arah baru" : "A space for new directions"} | Afana`,
+    title: `${safeLocale === "id" ? "Beranda" : "Home"} | Afana`,
     description:
       safeLocale === "id"
         ? "Prototype company profile Afana dengan arah visual editorial."

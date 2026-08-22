@@ -13,7 +13,13 @@ export function AdminAuthLayout({ title, description, children }: { title: strin
           </svg>
         </div>
         <div className="relative flex items-center gap-4">
-          <Image src="/afana_logo_icon_only.svg" alt="" width={38} height={38} />
+          <Image
+            src="/afana_logo_icon_only.svg"
+            alt=""
+            width={105}
+            height={80}
+            className="h-[38px] w-auto shrink-0"
+          />
           <span className="font-display text-lg font-semibold tracking-[-0.03em]">AFANA / CONTROL</span>
         </div>
         <div className="relative max-w-lg">
@@ -24,7 +30,13 @@ export function AdminAuthLayout({ title, description, children }: { title: strin
       <section className="flex min-w-0 items-center px-6 py-16 sm:px-10 lg:px-16 xl:px-24">
         <div className="mx-auto min-w-0 w-full max-w-lg">
           <div className="flex items-center gap-3 lg:hidden">
-            <Image src="/afana_logo_icon_only.svg" alt="" width={34} height={34} />
+            <Image
+              src="/afana_logo_icon_only.svg"
+              alt=""
+              width={105}
+              height={80}
+              className="h-[34px] w-auto shrink-0"
+            />
             <span className="font-display font-semibold">AFANA / CONTROL</span>
           </div>
           <h1 className="mt-12 font-display text-[clamp(2.25rem,6vw,4rem)] font-semibold leading-none tracking-[-0.04em] text-[var(--ink)] lg:mt-0">{title}</h1>

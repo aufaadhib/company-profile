@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { submitContactForm } from "@/app/actions/contact";
 import type { ContactPageContent } from "@/content/contact-content";
@@ -9,7 +9,17 @@ import type { ContactFormState, ContactLocale } from "@/lib/contact-validation";
 
 declare global {
   interface Window {
-    turnstile?: { reset: () => void };
+    turnstile?: {
+      render: (container: HTMLElement, options: {
+        sitekey: string;
+        action: string;
+        theme: "light";
+        language: ContactLocale;
+        "refresh-expired": "auto";
+      }) => string;
+      reset: (widgetId: string) => void;
+      remove: (widgetId: string) => void;
+    };
   }
 }
 
@@ -28,13 +38,56 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   return <p id={id} className="mt-2 text-sm leading-5 text-[var(--accent-strong)]">{message}</p>;
 }
 
+function TurnstileWidget({ siteKey, locale, resetKey }: {
+  siteKey: string;
+  locale: ContactLocale;
+  resetKey: ContactFormState;
+}) {
+  const [ready, setReady] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const turnstile = window.turnstile;
+    if (!ready || !container || !turnstile) return;
+
+    const widgetId = turnstile.render(container, {
+      sitekey: siteKey,
+      action: "contact",
+      theme: "light",
+      language: locale,
+      "refresh-expired": "auto",
+    });
+    widgetIdRef.current = widgetId;
+
+    return () => {
+      turnstile.remove(widgetId);
+      widgetIdRef.current = null;
+    };
+  }, [locale, ready, siteKey]);
+
+  useEffect(() => {
+    const widgetId = widgetIdRef.current;
+    if (resetKey.status === "error" && widgetId) window.turnstile?.reset(widgetId);
+  }, [resetKey]);
+
+  return (
+    <>
+      <Script
+        id="cloudflare-turnstile"
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        strategy="afterInteractive"
+        onReady={() => setReady(true)}
+      />
+      <div ref={containerRef} />
+    </>
+  );
+}
+
 export function ContactForm({ content, locale, siteKey, directEmail }: ContactFormProps) {
   const [state, formAction, pending] = useActionState(submitContactForm, initialState);
   const formDisabled = pending || !siteKey;
-
-  useEffect(() => {
-    if (state.status === "error") window.turnstile?.reset();
-  }, [state.status, state.message]);
 
   if (state.status === "success" || state.status === "warning") {
     return (
@@ -53,7 +106,6 @@ export function ContactForm({ content, locale, siteKey, directEmail }: ContactFo
 
   return (
     <>
-      {siteKey ? <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" /> : null}
       <form action={formAction} aria-busy={pending} className="border-t border-[var(--line)]">
         <input type="hidden" name="locale" value={locale} />
         <div className="pointer-events-none absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
@@ -103,7 +155,7 @@ export function ContactForm({ content, locale, siteKey, directEmail }: ContactFo
 
         {siteKey ? (
           <div className="border-t border-[var(--line)] py-6">
-            <div className="cf-turnstile" data-sitekey={siteKey} data-action="contact" data-theme="light" data-language={locale} data-refresh-expired="auto" />
+            <TurnstileWidget siteKey={siteKey} locale={locale} resetKey={state} />
             <FieldError id="contact-turnstile-error" message={state.fieldErrors?.turnstile} />
           </div>
         ) : (

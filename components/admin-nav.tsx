@@ -37,7 +37,13 @@ export function AdminNav({ user }: { user: { name: string; email: string; role: 
     <>
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 flex-col bg-[var(--ink)] px-8 py-8 text-white lg:flex">
         <Link href="/admin" className="flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-          <Image src="/afana_logo_icon_only.svg" alt="" width={34} height={34} />
+          <Image
+            src="/afana_logo_icon_only.svg"
+            alt=""
+            width={105}
+            height={80}
+            className="h-[34px] w-auto shrink-0"
+          />
           <span className="font-display font-semibold tracking-[-0.03em]">AFANA / CONTROL</span>
         </Link>
         <nav aria-label="Navigasi admin" className="mt-16"><NavigationLinks role={user.role} onDark /></nav>
@@ -52,7 +58,14 @@ export function AdminNav({ user }: { user: { name: string; email: string; role: 
       <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-[var(--paper)]/95 px-6 py-4 backdrop-blur lg:hidden">
         <div className="flex items-center justify-between gap-4">
           <Link href="/admin" className="flex items-center gap-3 font-display text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">
-            <Image src="/afana_logo_icon_only.svg" alt="" width={30} height={30} /> AFANA / CONTROL
+            <Image
+              src="/afana_logo_icon_only.svg"
+              alt=""
+              width={105}
+              height={80}
+              className="h-[30px] w-auto shrink-0"
+            />{" "}
+            AFANA / CONTROL
           </Link>
           <details className="group relative">
             <summary className="flex min-h-11 cursor-pointer list-none items-center border border-[var(--line)] px-4 text-sm font-semibold marker:content-none">Menu</summary>

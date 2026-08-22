@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Lokalkan metadata title beranda menjadi `Beranda | Afana` untuk Indonesia dan `Home | Afana` untuk Inggris.
 - Perbaiki transaksi Contact, workflow CMS, dan seed Media agar menggunakan isolation default yang didukung Prisma Neon serta tidak gagal dengan `P2028`.
 - Tambahkan Contact Control Admin-only dengan inbox responsif, read/archive, retry notifikasi, Auto Email, test email, dan pengaturan email/telepon/WhatsApp/lokasi publik.
 - Perbaiki undangan Editor agar memakai default role Better Auth tanpa membuka izin perubahan role, serta gunakan nama dan alamat sender Resend yang dapat dikonfigurasi melalui environment variable.
