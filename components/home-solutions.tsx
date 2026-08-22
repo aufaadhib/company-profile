@@ -190,7 +190,7 @@ function SolutionCard({
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
       style={{ "--solution-card-delay": `${index * 70}ms` } as CardStyle}
-      className="home-solution-card relative aspect-[4/5] min-w-[58.5vw] snap-start rounded-2xl border-0 bg-transparent p-0 text-left text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)] sm:min-w-[43.5vw] md:min-w-0 md:w-3/4 xl:w-full"
+      className="home-solution-card relative aspect-[4/5] min-w-[75vw] max-w-80 snap-start rounded-2xl border-0 bg-transparent p-0 text-left text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)] sm:min-w-[43.5vw] sm:max-w-none md:min-w-0 md:w-3/4 xl:w-full"
     >
       <span id={descriptionId} className="sr-only">{card.body}</span>
       <span
@@ -253,7 +253,7 @@ export function HomeSolutions({ content, detailHref }: HomeSolutionsProps) {
 
   return (
     <section id="bisnis-afana" className="scroll-mt-20 border-b border-[var(--line)] bg-white">
-      <div className="mx-auto w-full max-w-[1440px] px-6 py-20 sm:px-10 sm:py-24 lg:px-20 lg:py-28">
+      <div className="mx-auto w-full max-w-[1440px] px-6 py-16 sm:px-10 sm:py-24 lg:px-20 lg:py-28">
         <div className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-20">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">{content.label}</p>
@@ -278,7 +278,7 @@ export function HomeSolutions({ content, detailHref }: HomeSolutionsProps) {
         <div
           role="tablist"
           aria-label={content.label}
-          className="mt-12 inline-flex min-h-12 max-w-full rounded-full bg-[#e9edf1] p-1"
+          className="mt-10 grid min-h-12 w-full grid-cols-2 rounded-full bg-[#e9edf1] p-1 sm:mt-12 sm:inline-grid sm:w-auto"
         >
           {content.tabs.map((tab, index) => {
             const isActive = tab.id === activeTab.id;
@@ -294,7 +294,7 @@ export function HomeSolutions({ content, detailHref }: HomeSolutionsProps) {
                 tabIndex={isActive ? 0 : -1}
                 onClick={() => selectTab(tab.id)}
                 onKeyDown={(event) => handleTabKeyDown(event, index)}
-                className={`min-h-11 rounded-full px-5 text-sm font-semibold transition-[background-color,color] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${isActive ? "bg-[var(--ink)] text-white" : "text-[var(--ink)] hover:bg-white/70"}`}
+                className={`min-h-11 rounded-full px-3 text-sm font-semibold transition-[background-color,color] focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[var(--accent)] sm:px-5 ${isActive ? "bg-[var(--ink)] text-white" : "text-[var(--ink)] hover:bg-white/70"}`}
               >
                 {tab.label}
               </button>
@@ -307,7 +307,7 @@ export function HomeSolutions({ content, detailHref }: HomeSolutionsProps) {
           id={panelId}
           role="tabpanel"
           aria-labelledby={`home-solutions-tab-${activeTab.id}`}
-          className="home-solutions__rail -mx-6 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-3 sm:-mx-10 sm:px-10 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 xl:w-fit xl:grid-cols-[repeat(4,14rem)] xl:gap-4"
+          className="home-solutions__rail -mx-6 mt-5 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-3 sm:-mx-10 sm:mt-6 sm:scroll-px-10 sm:px-10 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 xl:w-fit xl:grid-cols-[repeat(4,14rem)] xl:gap-4"
         >
           {activeTab.cards.map((card, index) => {
             const isFlipped = flippedCardTitle === card.title;
