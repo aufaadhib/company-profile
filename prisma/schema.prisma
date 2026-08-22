@@ -1,0 +1,227 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ContactTopic {
+  GENERAL
+  ELECTRICAL_SOLUTIONS
+  PARTNERSHIP
+  PROCUREMENT
+  CAREER
+  MEDIA
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+  SKIPPED
+}
+
+enum MediaWorkflowStatus {
+  DRAFT
+  IN_REVIEW
+}
+
+enum MediaAssetSource {
+  LOCAL
+  BLOB
+}
+
+model User {
+  id                    String          @id
+  name                  String
+  email                 String          @unique
+  emailVerified         Boolean         @default(false)
+  image                 String?
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+  role                  String?
+  banned                Boolean?        @default(false)
+  banReason             String?
+  banExpires            DateTime?
+  sessions              Session[]
+  accounts              Account[]
+  createdMediaArticles  MediaArticle[]  @relation("MediaArticleCreator")
+  updatedMediaArticles  MediaArticle[]  @relation("MediaArticleUpdater")
+  publishedMediaArticles MediaArticle[] @relation("MediaArticlePublisher")
+  mediaRevisions        MediaRevision[]
+  mediaAssets           MediaAsset[]
+  auditLogs             AuditLog[]
+
+  @@map("user")
+}
+
+model Session {
+  id             String   @id
+  expiresAt      DateTime
+  token          String   @unique
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  ipAddress      String?
+  userAgent      String?
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  impersonatedBy String?
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  issuer                String
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@unique([issuer, accountId], map: "account_issuer_accountId_uidx")
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model MediaArticle {
+  id                  String              @id @default(uuid()) @db.Uuid
+  slug                String              @unique @db.VarChar(160)
+  workflowStatus      MediaWorkflowStatus @default(DRAFT)
+  draftRevisionId     String?             @unique @db.Uuid
+  publishedRevisionId String?             @unique @db.Uuid
+  isFeatured          Boolean             @default(false)
+  lockVersion         Int                 @default(0)
+  archivedAt          DateTime?
+  createdById         String?
+  updatedById         String?
+  publishedById       String?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  createdBy           User?               @relation("MediaArticleCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  updatedBy           User?               @relation("MediaArticleUpdater", fields: [updatedById], references: [id], onDelete: SetNull)
+  publishedBy         User?               @relation("MediaArticlePublisher", fields: [publishedById], references: [id], onDelete: SetNull)
+  revisions           MediaRevision[]     @relation("ArticleRevisions")
+  draftRevision       MediaRevision?      @relation("DraftRevision", fields: [draftRevisionId], references: [id], onDelete: SetNull)
+  publishedRevision   MediaRevision?      @relation("PublishedRevision", fields: [publishedRevisionId], references: [id], onDelete: SetNull)
+
+  @@index([workflowStatus, updatedAt])
+  @@index([archivedAt])
+  @@index([publishedRevisionId, archivedAt])
+}
+
+model MediaRevision {
+  id             String        @id @default(uuid()) @db.Uuid
+  articleId      String        @db.Uuid
+  revisionNumber Int
+  assetId        String?       @db.Uuid
+  payload        Json
+  createdById    String?
+  createdAt      DateTime      @default(now())
+  article        MediaArticle  @relation("ArticleRevisions", fields: [articleId], references: [id], onDelete: Cascade)
+  asset          MediaAsset?   @relation(fields: [assetId], references: [id], onDelete: Restrict)
+  createdBy      User?         @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  draftFor       MediaArticle? @relation("DraftRevision")
+  publishedFor   MediaArticle? @relation("PublishedRevision")
+
+  @@unique([articleId, revisionNumber])
+  @@index([articleId, createdAt])
+  @@index([assetId])
+}
+
+model MediaAsset {
+  id           String           @id @default(uuid()) @db.Uuid
+  source       MediaAssetSource
+  url          String           @db.Text
+  pathname     String?          @db.Text
+  mimeType     String           @db.VarChar(100)
+  size         Int
+  originalName String           @db.VarChar(255)
+  createdById  String?
+  createdAt    DateTime         @default(now())
+  createdBy    User?            @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  revisions    MediaRevision[]
+
+  @@index([createdById, createdAt])
+}
+
+model AuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  actorId    String?
+  action     String   @db.VarChar(80)
+  entityType String   @db.VarChar(80)
+  entityId   String   @db.VarChar(255)
+  metadata   Json?
+  createdAt  DateTime @default(now())
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([entityType, entityId, createdAt])
+  @@index([actorId, createdAt])
+}
+
+model ContactSubmission {
+  id                 String             @id @default(uuid()) @db.Uuid
+  name               String             @db.VarChar(100)
+  email              String             @db.VarChar(254)
+  phone              String?            @db.VarChar(30)
+  topic              ContactTopic
+  message            String             @db.Text
+  locale             String             @db.VarChar(2)
+  consentAt          DateTime
+  sourceHash         String             @db.VarChar(64)
+  notificationStatus NotificationStatus @default(PENDING)
+  notificationId     String?            @db.VarChar(255)
+  notifiedAt         DateTime?
+  notificationAttempts Int              @default(0)
+  lastNotificationAttemptAt DateTime?
+  readAt             DateTime?
+  archivedAt         DateTime?
+  createdAt          DateTime           @default(now())
+  expiresAt          DateTime
+
+  @@index([sourceHash, createdAt])
+  @@index([expiresAt])
+  @@index([notificationStatus])
+  @@index([archivedAt, createdAt])
+  @@index([readAt, createdAt])
+}
+
+model ContactSettings {
+  id               String   @id @db.VarChar(32)
+  autoEmailEnabled Boolean  @default(true)
+  publicEmail      String   @db.VarChar(254)
+  showEmail        Boolean  @default(true)
+  senderName       String   @db.VarChar(100)
+  senderEmail      String   @db.VarChar(254)
+  phone            String   @db.VarChar(30)
+  showPhone        Boolean  @default(true)
+  whatsapp         String   @db.VarChar(30)
+  showWhatsapp     Boolean  @default(true)
+  location         String   @db.VarChar(150)
+  showLocation     Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

@@ -52,19 +52,19 @@ export const siteContent: Record<Locale, SiteContent> = {
       },
       { label: "Bisnis Afana", href: "/#hero" },
       { label: "Media & Informasi", href: "/media-informasi" },
-      { label: "Keberlanjutan", href: "/#hero-copy" },
+      { label: "Keberlanjutan", href: "/keberlanjutan" },
     ],
     utilityNav: [
       { label: "Karier", href: "/#hero-copy" },
-      { label: "Kontak", href: "/#hero-copy" },
+      { label: "Kontak", href: "/kontak" },
     ],
     mobileFooterNav: [
       { label: "Pengadaan", href: "/#hero-copy" },
       { label: "Karier", href: "/#hero-copy" },
-      { label: "Hubungi Kami", href: "/#hero-copy" },
+      { label: "Hubungi Kami", href: "/kontak" },
     ],
     headerCtaLabel: "Mulai berkenalan",
-    headerCtaHref: "/#hero-copy",
+    headerCtaHref: "/kontak",
     languageLabel: "Bahasa",
     menuLabel: "Buka menu",
     closeLabel: "Tutup menu",
@@ -101,19 +101,19 @@ export const siteContent: Record<Locale, SiteContent> = {
       },
       { label: "Afana Business", href: "/#hero" },
       { label: "Media & Information", href: "/media-information" },
-      { label: "Sustainability", href: "/#hero-copy" },
+      { label: "Sustainability", href: "/sustainability" },
     ],
     utilityNav: [
       { label: "Careers", href: "/#hero-copy" },
-      { label: "Contact", href: "/#hero-copy" },
+      { label: "Contact", href: "/contact" },
     ],
     mobileFooterNav: [
       { label: "Procurement", href: "/#hero-copy" },
       { label: "Careers", href: "/#hero-copy" },
-      { label: "Contact Us", href: "/#hero-copy" },
+      { label: "Contact Us", href: "/contact" },
     ],
     headerCtaLabel: "Meet Afana",
-    headerCtaHref: "/#hero-copy",
+    headerCtaHref: "/contact",
     languageLabel: "Language",
     menuLabel: "Open menu",
     closeLabel: "Close menu",
@@ -154,6 +154,12 @@ export function getOtherLocaleHref(pathname: string, locale: Locale) {
   ).replace(
     /^\/(tentang-kami|about)(?=\/|$)/,
     otherLocale === "id" ? "/tentang-kami" : "/about",
+  ).replace(
+    /^\/(keberlanjutan|sustainability)(?=\/|$)/,
+    otherLocale === "id" ? "/keberlanjutan" : "/sustainability",
+  ).replace(
+    /^\/(kontak|contact)(?=\/|$)/,
+    otherLocale === "id" ? "/kontak" : "/contact",
   );
 
   return `/${otherLocale}${localizedPath === "/" ? "" : localizedPath}`;

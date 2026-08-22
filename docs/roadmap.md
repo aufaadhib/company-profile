@@ -20,6 +20,9 @@ Dokumen ini menyimpan milestone dan keputusan yang dapat berubah. Aturan impleme
 - **Completed** — Latar belakang perusahaan memakai timeline Swiper bilingual dengan navigasi manual, autoplay 25 detik, dan progress rail.
 - **Completed** — Semua link lintas halaman memakai prefix locale aktif; hash-only link dibatasi untuk anchor pada halaman yang sama.
 - **Completed** — Route About dipetakan bilingual dengan `/id/tentang-kami` dan `/en/about`; URL Inggris lama `/en/tentang-kami` hanya menjadi redirect legacy.
+- **Completed** — Contact memakai `/id/kontak` dan `/en/contact`; pesan disimpan pada Neon PostgreSQL, dilindungi Turnstile/rate limit, diberi notifikasi Resend, dan memiliki retensi 12 bulan.
+- **Completed** — Admin utama memiliki Contact Control untuk inbox, read/archive, retry email, Auto Email, dan kanal publik; Editor tidak memiliki akses ke data Contact.
+- **Completed** — CMS Media memakai Better Auth, Admin/Editor, revision draft/review/publish, Vercel Blob, dan artikel publik bilingual dari Neon PostgreSQL.
 
 ## Planned
 
@@ -63,9 +66,32 @@ Dokumen ini menyimpan milestone dan keputusan yang dapat berubah. Aturan impleme
 - [x] Jadikan hero Media & Informasi sebagai Swiper tiga berita terbaru dengan autoplay 8 detik dan reduced-motion fallback.
 - [x] Gunakan struktur konten lokal yang siap dipetakan ke CMS tanpa menambahkan CMS pada prototype.
 
+### 7. Sustainability
+
+- [x] Tambahkan route bilingual `/id/keberlanjutan` dan `/en/sustainability`.
+- [x] Tambahkan halaman technical sustainability editorial dengan alur nilai energi empat tahap.
+- [x] Tambahkan aset visual khusus Sustainability dan copy draft bilingual tanpa klaim metrik publik.
+- [ ] Ganti copy draft dengan data, program, target, dan materi Sustainability yang telah disetujui pengguna.
+
+### 8. Contact
+
+- [x] Tambahkan route Contact bilingual, metadata, language mapping, dan seluruh link navigasi terkait.
+- [x] Tambahkan connection-ledger hero, kanal email/telepon/WhatsApp/lokasi, dan form accessible.
+- [x] Tambahkan schema Prisma PostgreSQL, Server Action, Turnstile server verification, rate limit, Resend, serta retention cron.
+- [x] Tambahkan inbox Admin, status read/archive, retry notifikasi, Auto Email, test email, dan pengaturan kanal publik.
+- [ ] Buat project Neon, verifikasi domain Resend, buat widget Turnstile, dan pasang seluruh environment variable pada Vercel.
+- [ ] Jalankan migration dan smoke test submit production setelah service eksternal tersedia.
+
+### 9. CMS Media
+
+- [x] Tambahkan dashboard `/admin`, autentikasi email/password, satu Admin utama, dan invitation-only Editor.
+- [x] Tambahkan revision immutable, optimistic locking, review/publish, audit log, preview, dan upload Vercel Blob.
+- [x] Pindahkan sumber data Media publik ke CMS serta sediakan seed idempotent untuk enam artikel lama.
+- [ ] Konfigurasikan Better Auth, Vercel Blob, migration, seed, dan Admin utama pada production.
+
 ## Deferred
 
-- CMS, authentication, database, owner-only preview, dan media upload — hanya jika kebutuhan produk sudah jelas.
+- CMS untuk Beranda, About, Sustainability, Contact copy, navigation/footer, dan page builder tetap ditunda.
 - Library animation atau carousel tambahan — hanya jika CSS/native browser tidak mencukupi.
 
 ## Definition of Done

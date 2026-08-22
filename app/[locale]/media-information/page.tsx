@@ -5,14 +5,13 @@ import { MediaPage } from "@/components/media-page";
 import { SiteHeader } from "@/components/site-header";
 import { mediaPageContent } from "@/content/media-content";
 import { isLocale, siteContent } from "@/content/site-content";
+import { getPublishedMedia } from "@/lib/cms-service";
 
 type MediaRouteProps = {
   params: Promise<{ locale: string }>;
 };
 
-export function generateStaticParams() {
-  return [{ locale: "en" }];
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: MediaRouteProps): Promise<Metadata> {
   const { locale } = await params;
@@ -41,10 +40,12 @@ export default async function MediaRoute({ params }: MediaRouteProps) {
     notFound();
   }
 
+  const content = { ...mediaPageContent.en, items: await getPublishedMedia("en") };
+
   return (
     <>
       <SiteHeader locale="en" content={siteContent.en} />
-      <MediaPage content={mediaPageContent.en} locale="en" detailBasePath="/en/media-information" />
+      <MediaPage content={content} locale="en" detailBasePath="/en/media-information" />
     </>
   );
 }

@@ -3,16 +3,15 @@ import { notFound } from "next/navigation";
 
 import { MediaArticle } from "@/components/media-article";
 import { SiteHeader } from "@/components/site-header";
-import { getMediaItem, mediaPageContent } from "@/content/media-content";
+import { mediaPageContent } from "@/content/media-content";
 import { siteContent } from "@/content/site-content";
+import { getPublishedMedia, getPublishedMediaItem } from "@/lib/cms-service";
 
 type MediaArticleRouteProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-export function generateStaticParams() {
-  return mediaPageContent.id.items.map((item) => ({ locale: "id", slug: item.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: MediaArticleRouteProps): Promise<Metadata> {
   const { locale, slug } = await params;
@@ -20,7 +19,7 @@ export async function generateMetadata({ params }: MediaArticleRouteProps): Prom
     notFound();
   }
 
-  const item = getMediaItem("id", slug);
+  const item = await getPublishedMediaItem("id", slug);
   if (!item) {
     notFound();
   }
@@ -44,8 +43,9 @@ export default async function MediaArticleRoute({ params }: MediaArticleRoutePro
     notFound();
   }
 
-  const content = mediaPageContent.id;
-  const item = getMediaItem("id", slug);
+  const items = await getPublishedMedia("id");
+  const content = { ...mediaPageContent.id, items };
+  const item = items.find((candidate) => candidate.slug === slug);
   if (!item) {
     notFound();
   }

@@ -34,6 +34,7 @@ Header dan navigasi menggunakan permukaan putih dengan transparansi tinggi saat 
 
 ### Tipografi
 
+- Standar font, ukuran, line-height, tracking, dan tinggi seluruh hero berada di `docs/hero-standards.md` dan wajib digunakan bersama.
 - `Lexend` melalui `next/font/local` digunakan untuk logo wordmark, heading, navigasi utama, label display, dan angka besar.
 - `Source Sans 3` melalui `next/font/local` digunakan untuk body copy, utility navigation, deskripsi, dan teks pendukung.
 - Heading memakai tracking negatif yang rapat dan ukuran fluid dengan `clamp()`.
@@ -47,7 +48,7 @@ Header dan navigasi menggunakan permukaan putih dengan transparansi tinggi saat 
 - Halaman dirancang mobile-first dan diperiksa pada lebar `375px`, `768px`, `1024px`, dan `1440px`.
 - Di bawah `640px`, navigasi desktop dan tab section About disembunyikan; hamburger menu mengambil alih navigasi.
 - Mulai `1024px`, navigasi desktop dan tab section About tampil.
-- Section hero menggunakan `100svh` agar tinggi mengikuti viewport mobile modern tanpa menyisakan ruang akibat browser chrome.
+- Hero utama dapat memakai `100svh`, sedangkan hero interior memakai komposisi `60svh` sesuai matriks di `docs/hero-standards.md`.
 - Gambar menggunakan `next/image` dengan `fill`, `object-cover`, dan ukuran yang dideklarasikan agar tidak menyebabkan layout shift.
 
 ## Logo dan ikon
@@ -76,6 +77,8 @@ Header adalah elemen fixed di atas viewport:
 
 Pada desktop, navigasi memiliki primary navigation dan utility navigation. CTA header berada di utility navigation, sejajar dengan link pendukung dan bahasa di sisi kanan. Dropdown menggunakan focus state, hover state, dan panel putih dengan radius serta shadow ringan.
 
+Kontrol pencarian pada primary navigation tetap terlihat pada keadaan header transparan maupun compact setelah scroll, dengan warna yang mengikuti kontras permukaan header.
+
 ## Home hero
 
 Hero home adalah media full-bleed dengan tinggi `100svh` dan fokus pada solusi kelistrikan Afana.
@@ -100,7 +103,41 @@ Halaman Media & Informasi menggunakan pola editorial yang sama dengan hero Afana
 - Kartu media memakai gambar rounded, metadata kategori/tanggal, judul, ringkasan, dan link baca selengkapnya.
 - Halaman detail menggunakan hero artikel gelap, gambar utama, body copy lebar terbatas, dan bacaan terkait.
 - Reduced motion menonaktifkan autoplay media hero dan mengurangi perpindahan visual.
-- Konten awal bersifat dummy profesional, tetapi tipe data dan slug dibuat stabil agar dapat dipetakan ke CMS pada fase berikutnya.
+- Artikel published berasal dari CMS Media; label halaman tetap lokal agar UI publik tidak berubah menjadi page builder.
+
+## Dashboard Admin
+
+- Route `/admin` memakai shell terpisah tanpa header/footer publik, dengan sidebar gelap pada desktop dan menu ringkas pada mobile/tablet.
+- Arah visualnya adalah control ledger: permukaan terang, divider teknis, Lexend/Source Sans 3, serta aksen oranye yang sama dengan website.
+- Elemen khas berupa publication rail untuk kelengkapan Indonesia, Inggris, gambar, dan status workflow; bukan card dekoratif.
+- Editor memakai field datar, tab bilingual, blok paragraf yang dapat diurutkan, preview gambar, dan action bar yang jelas pada 375px, 768px, 1024px, serta 1440px.
+- Contact Control memakai ledger inbox responsif, detail pesan dengan jejak status, serta halaman settings tanpa card grid. Radio native memilih Auto Email aktif/nonaktif; checkbox native mengatur visibilitas email, telepon, WhatsApp, dan lokasi.
+- Inbox Contact menjadi daftar bertumpuk pada mobile dan grid berkolom pada desktop. Status unread, sent, failed, skipped, archived, loading, empty, pending, dan permission harus tetap terbaca tanpa bergantung pada warna.
+- Motion dashboard dibatasi pada transisi warna sederhana.
+
+## Sustainability
+
+Halaman Sustainability menggunakan arah technical sustainability editorial yang menjelaskan kontribusi Afana melalui kualitas daya, perlindungan perangkat, pemeliharaan, dan kesinambungan operasi.
+
+- Route bilingual menggunakan `/id/keberlanjutan` dan `/en/sustainability`.
+- Hero memakai foto industri full-bleed setinggi `60svh` dengan ruang copy di sisi kiri.
+- Elemen khas halaman adalah alur empat tahap berbasis HTML/CSS: memahami kondisi, menstabilkan daya, melindungi perangkat, dan memperpanjang nilai aset. Mobile dan tablet memakai panel datar tanpa shadow, sedangkan desktop memakai rail horizontal dengan node oranye tanpa divider vertikal panjang.
+- Alur nilai energi memakai dua kolom pada medium dan empat kolom mulai `1280px`, agar teks langkah tetap terbaca pada lebar `1024px`.
+- Copy versi awal bersifat draft aspiratif; angka dampak, target, sertifikasi, dan klaim faktual tidak boleh ditambahkan tanpa persetujuan pengguna.
+- Halaman menggunakan aset gambar khusus di `public/images/sustainability` dan tetap mengikuti aturan `next/image`, ukuran responsif, alt text, dan lazy loading di bawah fold.
+- Foto inspeksi pada Fokus Keberlanjutan memakai kualitas optimizer `90` untuk mempertahankan detail panel dan kabel yang rapat.
+
+## Contact
+
+Halaman Contact memakai route `/id/kontak` dan `/en/contact` dengan mode persuade yang tetap tenang dan teknis.
+
+- Hero interior memakai tinggi `60svh` dengan minimum `512px` dan skala `.hero-title` bersama.
+- Signature visual adalah connection ledger berupa SVG geometris presisi dengan node oranye; bukan ilustrasi, peta, grid dekoratif, atau foto generik.
+- Kanal email, telepon, WhatsApp, dan lokasi disusun sebagai baris editorial dengan divider, bukan kumpulan card identik.
+- Form memakai field datar dengan border bawah, label tetap terlihat, pending/error/success state, consent, dan Turnstile.
+- Client Component dibatasi pada form. Route, hero, kanal langsung, dan metadata tetap Server Component.
+- Tanpa konfigurasi Turnstile, tombol submit nonaktif dengan penjelasan yang jelas; kanal langsung tetap dapat dipakai.
+- Nilai awal yang disetujui: `info@afana.id`, `081331096250`, dan Banyuwangi. Admin dapat memperbarui atau menyembunyikan kanal tersebut; jangan menambahkan alamat rinci, peta, jam operasional, atau waktu respons tanpa input pengguna.
 
 ## Halaman About
 
@@ -167,5 +204,5 @@ Footer menggunakan permukaan `--ink` dengan teks putih dan struktur kolom inform
 
 - Gunakan Server Component secara default; Client Component hanya untuk scroll state, browser API, Swiper, atau interaksi menu.
 - Gunakan native CSS dan browser behavior sebelum menambah dependency.
-- Jangan menambahkan CMS, database, authentication, upload media, library animation, atau carousel baru tanpa kebutuhan produk yang jelas.
+- Database digunakan untuk form Contact dan CMS Media yang telah disetujui. Jangan memperluas CMS ke halaman lain tanpa kebutuhan produk yang jelas.
 - Setiap perubahan visual yang mengubah token, breakpoint, motion, atau hierarchy harus diperbarui di dokumen ini dan diverifikasi pada breakpoint utama.

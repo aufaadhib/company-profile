@@ -83,7 +83,7 @@ export function AboutPage({ content }: AboutPageProps) {
   return (
     <main id="main-content" className="flex-1 bg-[var(--paper)]">
       <AboutSectionHashSync />
-      <section className="relative isolate min-h-[35rem] overflow-hidden bg-[var(--ink)] text-white lg:min-h-[calc(100svh-4rem)]">
+      <section className="relative isolate h-[60svh] min-h-[32rem] overflow-hidden bg-[var(--ink)] text-white">
         <Image
           src={content.heroImage}
           alt=""
@@ -94,17 +94,17 @@ export function AboutPage({ content }: AboutPageProps) {
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,20,27,.8)_0%,rgba(1,36,46,.45)_52%,rgba(1,20,27,.3)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(1,20,27,.86)_0%,rgba(1,20,27,.08)_68%)]" />
-        <div className="relative z-10 mx-auto flex min-h-[35rem] w-full max-w-[1440px] items-end px-6 pb-16 pt-36 sm:px-10 sm:pb-20 lg:min-h-[calc(100svh-4rem)] lg:px-20 lg:pb-24">
+        <div className="relative z-10 mx-auto flex h-full w-full max-w-[1440px] items-end px-6 pb-16 pt-36 sm:px-10 sm:pb-20 lg:px-20 lg:pb-24">
           <div className="max-w-5xl">
-            <p className="mb-8 flex flex-wrap items-center gap-3 text-sm font-medium text-white/90 sm:text-base">
+            <p className="hero-breadcrumb mb-8 flex flex-wrap items-center gap-3 text-white/90">
               <span>{content.breadcrumbHome}</span>
               <span aria-hidden="true" className="text-white/60">/</span>
               <span>{content.breadcrumbCurrent}</span>
             </p>
-            <h1 className="font-display text-[clamp(3rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-white">
+            <h1 className="hero-title text-white">
               {content.title}
             </h1>
-            <p className="mt-7 max-w-4xl text-base leading-7 text-white/90 sm:text-lg sm:leading-8">
+            <p className="hero-description mt-7 max-w-4xl text-white/90">
               {content.description}
             </p>
           </div>

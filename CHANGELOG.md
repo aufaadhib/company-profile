@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+- Perbaiki transaksi Contact, workflow CMS, dan seed Media agar menggunakan isolation default yang didukung Prisma Neon serta tidak gagal dengan `P2028`.
+- Tambahkan Contact Control Admin-only dengan inbox responsif, read/archive, retry notifikasi, Auto Email, test email, dan pengaturan email/telepon/WhatsApp/lokasi publik.
+- Perbaiki undangan Editor agar memakai default role Better Auth tanpa membuka izin perubahan role, serta gunakan nama dan alamat sender Resend yang dapat dikonfigurasi melalui environment variable.
+- Tambahkan CMS Media produksi pada `/admin` dengan Better Auth, role Admin/Editor, invitation-only access, reset password, revision immutable, optimistic locking, audit log, preview, dan workflow draft/review/publish.
+- Tambahkan upload gambar Vercel Blob tervalidasi, seed idempotent enam artikel lama, serta pindahkan listing/detail Media bilingual ke published revision di Neon PostgreSQL.
+- Tambahkan halaman Contact bilingual `/id/kontak` dan `/en/contact` dengan connection-ledger hero, kanal email/telepon/WhatsApp, form accessible, metadata, dan language mapping.
+- Tambahkan penyimpanan pesan Contact pada Neon PostgreSQL melalui Prisma, notifikasi Resend, validasi Turnstile, rate limit berbasis HMAC tanpa IP mentah, dan retensi 12 bulan melalui Vercel Cron.
+- Dokumentasikan setup Node 24, Neon, Resend, Turnstile, environment variable, batas privacy, serta product context Contact.
+- Standarkan typography seluruh hero melalui satu skala judul fluid `44–68px`, lalu dokumentasikan aturannya di `docs/hero-standards.md`.
+- Variasikan tinggi hero: Home dan Media listing tetap full-screen, About dan Sustainability menjadi `60svh`, serta detail artikel memakai minimum `60svh`.
+- Tingkatkan kualitas optimasi foto inspeksi Sustainability agar detail panel dan kabel tidak terlihat blur.
+- Rapikan styling alur nilai energi menjadi panel datar pada mobile/tablet dan rail proses horizontal pada desktop.
+- Perbaiki breakpoint alur nilai energi Sustainability agar layout empat kolom baru aktif mulai `1280px` dan tidak memadat pada lebar medium.
+- Tambahkan halaman Sustainability bilingual dengan alur nilai energi, fokus kualitas daya, praktik pemeliharaan, dan aset visual industri khusus.
+- Tampilkan ikon pencarian pada primary navigation baik saat header utama transparan maupun saat navbar compact setelah scroll.
 - Atur media hero home sebagai `loading="eager"` agar slide full-viewport tidak terlambat saat menjadi kandidat LCP pada autoplay.
 - Batalkan seluruh implementasi CMS, termasuk route admin/API, authentication, database integration, media upload, dependency terkait, dan environment lokal CMS; situs kembali menggunakan konten lokal.
 - Perbaiki link header, menu mobile, footer, dan CTA agar konsisten menuju route `/id` atau `/en`, termasuk anchor beranda.

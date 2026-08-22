@@ -84,8 +84,10 @@ export function MediaPage({ content, locale, detailBasePath }: MediaPageProps) {
     .sort((first, second) => second.publishedAt.localeCompare(first.publishedAt))
     .slice(0, 3);
   const activeItems = activeCategory === "all" ? content.items : content.items.filter((item) => item.category === activeCategory);
-  const featuredItem = activeItems[0];
-  const supportingItems = activeItems.slice(1);
+  const featuredItem = activeCategory === "all"
+    ? activeItems.find((item) => item.featured) ?? activeItems[0]
+    : activeItems[0];
+  const supportingItems = activeItems.filter((item) => item.id !== featuredItem?.id);
 
   return (
     <main id="main-content" className="flex-1 bg-[var(--paper)]">
@@ -122,19 +124,19 @@ export function MediaPage({ content, locale, detailBasePath }: MediaPageProps) {
               <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(1,20,27,.94)_0%,rgba(1,20,27,.12)_78%)]" />
               <div className="relative z-10 mx-auto flex h-full w-full max-w-[1440px] items-end px-6 pb-24 pt-36 sm:px-10 sm:pb-24 lg:px-20 lg:pb-16">
                 <div className="max-w-4xl">
-                  <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/75 sm:text-sm">
+                  <div className="hero-eyebrow mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-white/75">
                     <span>{content.eyebrow}</span>
                     <span aria-hidden="true" className="text-[var(--accent)]">/</span>
                     <span>{String(index + 1).padStart(2, "0")} / 03</span>
                   </div>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent)]">
+                  <div className="hero-meta flex flex-wrap items-center gap-x-3 gap-y-1 text-[var(--accent)]">
                     <span>{content.categoryLabels[item.category]}</span>
                     <span aria-hidden="true" className="text-white/40">/</span>
                     <time dateTime={item.publishedAt} className="text-white/70">{formatMediaDate(item.publishedAt, locale)}</time>
                   </div>
-                  <h2 className="mt-5 max-w-4xl font-display text-[clamp(2.35rem,6vw,5.5rem)] font-semibold leading-[0.96] tracking-[-0.07em] text-white">{item.title}</h2>
-                  <p className="mt-6 max-w-2xl text-base leading-7 text-white/85 sm:text-lg sm:leading-8">{item.excerpt}</p>
-                  <Link href={`${detailBasePath}/${item.slug}`} className="mt-8 inline-flex min-h-12 w-fit items-center rounded-full border border-white/70 px-5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                  <h2 className="hero-title mt-5 max-w-4xl text-white">{item.title}</h2>
+                  <p className="hero-description mt-6 max-w-2xl text-white/85">{item.excerpt}</p>
+                  <Link href={`${detailBasePath}/${item.slug}`} className="hero-action mt-8 inline-flex min-h-12 w-fit items-center rounded-full border border-white/70 px-5 text-white transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
                     {content.readMoreLabel}
                     <span aria-hidden="true" className="ml-3 text-lg leading-none">→</span>
                   </Link>

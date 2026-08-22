@@ -219,7 +219,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
             })}
             <button
               type="button"
-              className={`flex min-h-11 min-w-11 items-center justify-center transition-opacity ${isScrolled ? "opacity-100" : "hidden"} focus-visible:outline-2 ${isScrolled ? "focus-visible:outline-[var(--ink)]" : "focus-visible:outline-white"}`}
+              className={`flex min-h-11 min-w-11 items-center justify-center transition-opacity focus-visible:outline-2 ${isScrolled ? "focus-visible:outline-[var(--ink)]" : "focus-visible:outline-white"}`}
               aria-label={locale === "id" ? "Cari" : "Search"}
             >
               <SearchIcon />

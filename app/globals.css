@@ -38,6 +38,59 @@ body {
   font-family: var(--font-source-sans), sans-serif;
 }
 
+input,
+textarea {
+  caret-color: var(--accent);
+}
+
+.hero-breadcrumb {
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: clamp(0.875rem, 0.83rem + 0.2vw, 1rem);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.hero-eyebrow,
+.hero-meta {
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.hero-eyebrow {
+  letter-spacing: 0.16em;
+}
+
+.hero-meta {
+  letter-spacing: 0.12em;
+}
+
+.hero-title {
+  font-family: var(--font-lexend), sans-serif;
+  font-size: clamp(2.75rem, 2.25rem + 2vw, 4.25rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.hero-description {
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.hero-action {
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+
 ::selection {
   background: var(--accent);
   color: white;
@@ -111,7 +164,8 @@ body {
   min-height: 1.5rem;
   white-space: nowrap;
   color: white;
-  font-size: 0.68rem;
+  font-family: var(--font-source-sans), sans-serif;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   line-height: 1;

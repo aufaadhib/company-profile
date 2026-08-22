@@ -25,20 +25,20 @@ export function MediaArticle({ content, item, locale, detailBasePath }: MediaArt
 
   return (
     <main id="main-content" className="flex-1 bg-[var(--paper)]">
-      <section className="bg-[var(--ink)] text-white">
-        <div className="mx-auto w-full max-w-[1180px] px-6 pb-16 pt-36 sm:px-10 sm:pb-20 lg:px-12 lg:pb-24">
-          <Link href={detailBasePath} className="inline-flex min-h-11 items-center text-sm font-semibold text-white/75 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+      <section className="min-h-[60svh] bg-[var(--ink)] text-white">
+        <div className="mx-auto flex min-h-[60svh] w-full max-w-[1180px] flex-col justify-end px-6 pb-16 pt-36 sm:px-10 sm:pb-20 lg:px-12 lg:pb-24">
+          <Link href={detailBasePath} className="hero-action inline-flex min-h-11 w-fit items-center text-white/75 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
             <span aria-hidden="true" className="mr-3 text-lg leading-none">←</span>
             {content.backLabel}
           </Link>
           <div className="mt-12 max-w-4xl">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent)] sm:text-sm">
+            <div className="hero-meta flex flex-wrap items-center gap-x-3 gap-y-1 text-[var(--accent)]">
               <span>{content.categoryLabels[item.category]}</span>
               <span aria-hidden="true" className="text-white/35">/</span>
               <time dateTime={item.publishedAt} className="text-white/60">{formatMediaDate(item.publishedAt, locale)}</time>
             </div>
-            <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[0.96] tracking-[-0.07em] text-white">{item.title}</h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/80">{item.excerpt}</p>
+            <h1 className="hero-title mt-5 text-white">{item.title}</h1>
+            <p className="hero-description mt-7 max-w-2xl text-white/80">{item.excerpt}</p>
           </div>
         </div>
       </section>

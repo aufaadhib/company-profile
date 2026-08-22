@@ -60,13 +60,13 @@ export function HeroCarousel({ slides, content }: HeroCarouselProps) {
       </Swiper>
       <div className="pointer-events-none absolute inset-0 z-20 flex items-end px-6 pb-36 sm:px-10 sm:pb-40 lg:px-20 lg:pb-44">
         <div className="max-w-3xl text-left">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-white/80 sm:text-sm">
+          <p className="hero-eyebrow mb-4 text-white/80">
             {content.slides[0].eyebrow}
           </p>
-          <h1 className="max-w-3xl font-display text-[clamp(2.4rem,6vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-white">
+          <h1 className="hero-title max-w-3xl text-white">
             {content.heroTitle}
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-white/90 sm:text-lg sm:leading-8">
+          <p className="hero-description mt-5 max-w-2xl text-white/90">
             {content.heroDescription}
           </p>
         </div>

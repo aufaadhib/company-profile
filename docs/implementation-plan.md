@@ -96,6 +96,6 @@ Jangan menjalankan dua agent secara bersamaan di working tree yang sama. Jika me
 
 ## Di luar scope
 
-- CMS, database, authentication, dashboard owner, dan upload media.
+- Page builder untuk halaman publik, analytics, komentar, dan pengelolaan navigation/footer tetap di luar scope. Dashboard terbatas pada workflow Media dan operasi Contact yang disetujui di `docs/roadmap.md` serta `docs/security.md`.
 - Penambahan library animasi atau carousel baru.
 - Klaim bisnis, statistik, sertifikasi, daftar pelanggan, alamat, atau kontak yang belum disetujui.
