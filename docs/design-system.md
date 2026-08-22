@@ -91,6 +91,22 @@ Hero home adalah media full-bleed dengan tinggi `100svh` dan fokus pada solusi k
 - Swiper memakai fade transition dengan speed `1200ms`, keyboard navigation, pagination clickable, accessibility labels, dan autoplay `7000ms`.
 - Seluruh media hero dimuat eager karena setiap slide full-viewport dapat menjadi kandidat LCP saat autoplay; jumlahnya tetap dibatasi pada aset hero.
 
+## Home sections
+
+Setelah hero, Home membentuk alur corporate editorial yang menghubungkan profil, ruang solusi, cara kerja, keberlanjutan, Media, dan Contact tanpa mengulang komposisi hero interior.
+
+- Teaser profil memakai susunan media dan copy asimetris dengan satu garis oranye sebagai penanda aliran energi.
+- Anchor `#bisnis-afana` menampilkan ruang solusi dengan tab Fokus Sistem dan Pendekatan Kerja. Setiap tab berisi empat kartu interaktif: gambar dan judul di depan, lalu ringkasan teknis setelah kartu berputar.
+- Ukuran visual kartu solusi diperkecil menjadi 75% dari lebar grid awal pada mobile, tablet, dan desktop; card tetap menempel ke kiri dengan gap desktop yang rapat dan whitespace di sisi kanan, sementara rasio kartu tetap portrait agar hierarki gambar dan judul terjaga.
+- Fine pointer membalik kartu saat hover. Keyboard memakai Enter/Space dan perangkat sentuh memakai tap untuk mengunci atau mengembalikan kartu; nama tindakan dan ringkasan tetap tersedia bagi screen reader.
+- Flip memakai satu bidang visual yang menutup ke 90 derajat, menukar konten di titik tengah, lalu membuka kembali. Permukaan depan dan belakang tidak dirender bertumpuk agar tidak menimbulkan artefak pada frame transisi.
+- Pergantian tab memakai hinge transition CSS berurutan. Reduced motion meniadakan gerakan besar; mobile memakai horizontal scroll-snap native, medium memakai dua kolom, dan desktop empat kolom.
+- Section `#cara-kerja-afana` menampilkan empat langkah dalam rail teknis: memahami kondisi, menstabilkan daya, melindungi perangkat, dan memperpanjang nilai aset.
+- Teaser Sustainability memakai foto inspeksi kualitas daya dengan optimizer quality `90` dan mengarahkan pembaca ke route Sustainability aktif.
+- Tiga Media terbaru dibaca dari published revision CMS dan ditampilkan melalui boundary Suspense lokal. Skeleton hanya menggantikan grid artikel, sementara heading dan navigasi section tetap tersedia.
+- Penutup Home memakai bidang oranye solid sebagai transisi menuju Contact; tidak menambahkan form kedua atau kanal kontak yang terduplikasi.
+- Seluruh section tetap memakai container `1440px`, padding responsif `24/40/80px`, heading Lexend, body Source Sans 3, divider teknis, dan target sentuh minimal `44px`.
+
 ## Media & Informasi
 
 Halaman Media & Informasi menggunakan pola editorial yang sama dengan hero Afana, tetapi lebih berorientasi pada pembacaan:
@@ -190,6 +206,7 @@ Footer menggunakan permukaan `--ink` dengan teks putih dan struktur kolom inform
 - Focus state selalu terlihat pada link, button, tab, dropdown, pagination, dan kontrol carousel.
 - `prefers-reduced-motion: reduce` mengurangi durasi transisi dan menonaktifkan autoplay atau perpindahan besar yang tidak diperlukan.
 - Tidak ada animasi dekoratif yang mengalahkan copy atau media utama.
+- Semua tombol aktif menggunakan cursor pointer melalui baseline global; tombol disabled tidak diperlakukan sebagai pointer.
 
 ## Accessibility dan content
 

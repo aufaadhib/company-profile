@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Lengkapi Home bilingual setelah hero dengan teaser profil, rail cara kerja, Sustainability, tiga Media terbaru dari CMS, CTA Contact, dan anchor Bisnis Afana yang nyata.
+- Tambahkan section Bisnis Afana dua tab dengan kartu media Fokus Sistem dan Pendekatan Kerja, hinge transition CSS, serta scroll-snap native pada mobile.
+- Ubah kartu Bisnis Afana menjadi kartu flip saat hover yang dapat dikunci melalui tap atau keyboard untuk menampilkan ringkasan.
+- Perbaiki artefak flip Bisnis Afana dengan satu bidang visual dan pertukaran konten tepat di tengah animasi, sehingga permukaan depan dan belakang tidak lagi terlihat bersamaan.
+- Perkecil kartu solusi Home menjadi 75% dari ukuran grid sebelumnya dan standarkan cursor pointer untuk seluruh tombol aktif.
+- Rapatkan kartu solusi Home ke sisi kiri setiap kolom dan pertahankan whitespace di sisi kanan sesuai komposisi editorial.
+- Padatkan gap antar-card solusi pada desktop agar rail mengikuti komposisi referensi yang lebih rapat.
+- Pastikan wrapper copy hero Home dapat menyusut pada mobile agar judul dan deskripsi panjang tidak melewati viewport tanpa mengecilkan standar typography.
 - Lokalkan metadata title beranda menjadi `Beranda | Afana` untuk Indonesia dan `Home | Afana` untuk Inggris.
 - Perbaiki transaksi Contact, workflow CMS, dan seed Media agar menggunakan isolation default yang didukung Prisma Neon serta tidak gagal dengan `P2028`.
 - Tambahkan Contact Control Admin-only dengan inbox responsif, read/archive, retry notifikasi, Auto Email, test email, dan pengaturan email/telepon/WhatsApp/lokasi publik.

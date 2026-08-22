@@ -59,7 +59,7 @@ export function HeroCarousel({ slides, content }: HeroCarouselProps) {
         ))}
       </Swiper>
       <div className="pointer-events-none absolute inset-0 z-20 flex items-end px-6 pb-36 sm:px-10 sm:pb-40 lg:px-20 lg:pb-44">
-        <div className="max-w-3xl text-left">
+        <div className="min-w-0 max-w-3xl flex-1 text-left">
           <p className="hero-eyebrow mb-4 text-white/80">
             {content.slides[0].eyebrow}
           </p>

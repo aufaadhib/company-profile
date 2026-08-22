@@ -24,6 +24,8 @@ Dokumen ini menyimpan milestone dan keputusan yang dapat berubah. Aturan impleme
 - **Completed** — Admin utama memiliki Contact Control untuk inbox, read/archive, retry email, Auto Email, dan kanal publik; Editor tidak memiliki akses ke data Contact.
 - **Completed** — CMS Media memakai Better Auth, Admin/Editor, revision draft/review/publish, Vercel Blob, dan artikel publik bilingual dari Neon PostgreSQL.
 
+- **Completed** — Home membentuk alur lengkap dari hero menuju profil, cara kerja, Sustainability, Media terbaru dari CMS, dan Contact dengan anchor bisnis bilingual.
+
 ## Planned
 
 ### 1. Bilingual foundation
@@ -88,6 +90,14 @@ Dokumen ini menyimpan milestone dan keputusan yang dapat berubah. Aturan impleme
 - [x] Tambahkan revision immutable, optimistic locking, review/publish, audit log, preview, dan upload Vercel Blob.
 - [x] Pindahkan sumber data Media publik ke CMS serta sediakan seed idempotent untuk enam artikel lama.
 - [ ] Konfigurasikan Better Auth, Vercel Blob, migration, seed, dan Admin utama pada production.
+
+### 10. Home
+
+- [x] Pertahankan hero brand `100svh` sebagai pembuka utama.
+- [x] Tambahkan teaser profil, rail cara kerja, Sustainability, Media terbaru, dan CTA Contact dalam struktur bilingual.
+- [x] Arahkan navigasi Bisnis Afana ke section `#bisnis-afana` yang nyata.
+- [x] Tambahkan tab Fokus Sistem dan Pendekatan Kerja dengan kartu media single-plane, hover/tap/keyboard flip, scroll-snap mobile, dan hinge transition yang menghormati reduced motion.
+- [x] Stream Media terbaru melalui Suspense lokal tanpa menahan konten Home yang statis.
 
 ## Deferred
 

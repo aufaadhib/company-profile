@@ -29,7 +29,7 @@ export function SiteFooter({ locale, content }: SiteFooterProps) {
             <span>Afana</span>
           </Link>
           <p className="mt-6 max-w-xs text-sm leading-6 text-white/60">
-            {locale === "id" ? "Ruang prototype untuk arah, identitas, dan pengalaman Afana." : "A prototype space for Afana's direction, identity, and experience."}
+            {locale === "id" ? "Solusi kelistrikan terintegrasi untuk membantu melindungi perangkat dan menjaga kesinambungan operasi." : "Integrated electrical solutions that help protect devices and maintain operational continuity."}
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export function SiteFooter({ locale, content }: SiteFooterProps) {
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-white/45">{locale === "id" ? "Mulai" : "Start"}</h2>
           <p className="mt-5 max-w-xs text-sm leading-6 text-white/65">
-            {locale === "id" ? "Sampaikan kebutuhan konten dan identitas yang ingin dikembangkan." : "Share the content and identity direction you want to develop."}
+            {locale === "id" ? "Sampaikan kebutuhan solusi kelistrikan atau peluang kerja sama kepada tim Afana." : "Share an electrical solution need or collaboration opportunity with the Afana team."}
           </p>
           <Link href={getLocaleHref(content.headerCtaHref, locale)} className="mt-6 inline-flex min-h-11 items-center rounded-full border border-white/75 px-5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
             {content.headerCtaLabel}
@@ -70,7 +70,7 @@ export function SiteFooter({ locale, content }: SiteFooterProps) {
       <div className="border-t border-white/15">
         <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-2 px-6 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between sm:px-10 lg:px-20">
           <span>Afana / {locale.toUpperCase()}</span>
-          <span>{locale === "id" ? "Prototype company profile" : "Company profile prototype"}</span>
+          <span>{locale === "id" ? "Profil perusahaan Afana" : "Afana company profile"}</span>
         </div>
       </div>
     </footer>
