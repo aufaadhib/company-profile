@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { FaqDesk } from "@/components/faq-desk";
 import type { FaqPageContent } from "@/content/faq-content";
 import { getLocaleHref, type Locale } from "@/content/site-content";
 import type { PublishedFaqCategory } from "@/lib/faq-service";
@@ -8,7 +9,6 @@ type FaqPageProps = {
   locale: Locale;
   content: FaqPageContent;
   categories: PublishedFaqCategory[];
-  visibleCategories: PublishedFaqCategory[];
   query: string;
   activeCategory: string;
 };
@@ -26,17 +26,7 @@ function DeskGraphic() {
   );
 }
 
-function filterHref(locale: Locale, category: string, query: string) {
-  const params = new URLSearchParams();
-  if (query) params.set("q", query);
-  if (category) params.set("category", category);
-  const suffix = params.toString();
-  return `/${locale}/faq${suffix ? `?${suffix}` : ""}`;
-}
-
-export function FaqPage({ locale, content, categories, visibleCategories, query, activeCategory }: FaqPageProps) {
-  const resultCount = visibleCategories.reduce((total, category) => total + category.items.length, 0);
-  const hasPublishedFaq = categories.length > 0;
+export function FaqPage({ locale, content, categories, query, activeCategory }: FaqPageProps) {
   return (
     <main id="main-content" className="flex-1 bg-[var(--paper)]">
       <section aria-labelledby="faq-title" className="relative isolate h-[60svh] min-h-[512px] overflow-hidden bg-[var(--ink)] text-white">
@@ -51,38 +41,7 @@ export function FaqPage({ locale, content, categories, visibleCategories, query,
         </div>
       </section>
 
-      <section aria-labelledby="faq-desk-title" className="mx-auto w-full max-w-[1440px] px-6 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16 xl:grid-cols-[21rem_minmax(0,1fr)]">
-          <aside className="lg:sticky lg:top-28 lg:self-start">
-            <h2 id="faq-desk-title" className="font-display text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-none tracking-[-0.04em]">FAQ desk</h2>
-            <form action={`/${locale}/faq`} method="get" className="mt-8 border-t border-[var(--ink)] pt-6">
-              <label htmlFor="faq-search" className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">{content.searchLabel}</label>
-              <div className="mt-3 flex border border-[var(--line)] bg-white focus-within:border-[var(--accent)]">
-                <input id="faq-search" name="q" defaultValue={query} placeholder={content.searchPlaceholder} className="min-h-12 min-w-0 flex-1 bg-transparent px-4 outline-none" />
-                {activeCategory ? <input type="hidden" name="category" value={activeCategory} /> : null}
-                <button className="min-h-12 border-l border-[var(--line)] px-4 text-sm font-semibold hover:bg-[var(--ink)] hover:text-white">{content.searchButton}</button>
-              </div>
-            </form>
-            <nav aria-label={locale === "id" ? "Filter kategori FAQ" : "FAQ category filters"} className="mt-8 border-t border-[var(--line)]">
-              <Link href={filterHref(locale, "", query)} aria-current={!activeCategory ? "page" : undefined} className={`flex min-h-12 items-center justify-between border-b border-[var(--line)] text-sm font-semibold ${!activeCategory ? "text-[var(--ink)]" : "text-[var(--muted)] hover:text-[var(--ink)]"}`}><span>{content.allCategories}</span><span aria-hidden="true">{!activeCategory ? "●" : "○"}</span></Link>
-              {categories.map((category) => <Link key={category.id} href={filterHref(locale, category.slug, query)} aria-current={activeCategory === category.slug ? "page" : undefined} className={`flex min-h-12 items-center justify-between border-b border-[var(--line)] text-sm font-semibold ${activeCategory === category.slug ? "text-[var(--ink)]" : "text-[var(--muted)] hover:text-[var(--ink)]"}`}><span>{category.title}</span><span aria-hidden="true">{activeCategory === category.slug ? "●" : "○"}</span></Link>)}
-            </nav>
-          </aside>
-
-          <div>
-            {hasPublishedFaq ? <p className="border-b border-[var(--ink)] pb-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted)]" aria-live="polite">{content.resultsLabel(resultCount)}</p> : null}
-            {visibleCategories.map((category) => (
-              <section key={category.id} aria-labelledby={`faq-category-${category.id}`} className="border-b border-[var(--ink)] py-9 first:pt-6">
-                <div className="grid gap-5 sm:grid-cols-[2.5rem_1fr]"><span className="font-display text-sm font-semibold text-[var(--accent)]">{String(categories.findIndex((entry) => entry.id === category.id) + 1).padStart(2, "0")}</span><div><h3 id={`faq-category-${category.id}`} className="font-display text-2xl font-semibold tracking-[-0.03em]">{category.title}</h3><div className="mt-5 border-t border-[var(--line)]">
-                  {category.items.map((item) => <details key={item.id} className="group border-b border-[var(--line)]"><summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 py-4 font-semibold leading-6 marker:content-none"><span>{item.question}</span><span className="grid size-8 shrink-0 place-items-center rounded-full border border-[var(--line)] text-xl font-normal transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary><div className="max-w-3xl whitespace-pre-line pb-6 pr-10 leading-7 text-[var(--muted)] sm:pr-16">{item.answer}</div></details>)}
-                </div></div></div>
-              </section>
-            ))}
-            {!hasPublishedFaq ? <div className="border-y border-[var(--ink)] py-14"><p className="font-display text-3xl font-semibold tracking-[-0.04em]">{content.emptyTitle}</p><p className="mt-5 max-w-xl leading-7 text-[var(--muted)]">{content.emptyDescription}</p></div> : null}
-            {hasPublishedFaq && resultCount === 0 ? <div className="border-b border-[var(--ink)] py-14"><p className="font-display text-3xl font-semibold tracking-[-0.04em]">{content.noResultsTitle}</p><p className="mt-5 max-w-xl leading-7 text-[var(--muted)]">{content.noResultsDescription}</p><Link href={`/${locale}/faq`} className="mt-7 inline-flex min-h-11 items-center border border-[var(--ink)] px-5 text-sm font-semibold hover:bg-[var(--ink)] hover:text-white">{content.clearFilters}</Link></div> : null}
-          </div>
-        </div>
-      </section>
+      <FaqDesk key={`${query}:${activeCategory}`} locale={locale} content={content} categories={categories} query={query} activeCategory={activeCategory} />
 
       <section className="bg-[var(--ink)] text-white">
         <div className="mx-auto grid w-full max-w-[1440px] gap-8 px-6 py-14 sm:px-10 sm:py-16 lg:grid-cols-[1fr_auto] lg:items-end lg:px-20 lg:py-20">

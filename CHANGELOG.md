@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Ubah pencarian dan filter FAQ menjadi client-side transition tanpa scroll ke hero, dengan progress loading lokal yang mempertahankan hasil sebelumnya.
 - Perbaiki komposisi Bisnis Afana pada mobile dengan tab selebar konten, kartu `75vw`, snap offset yang konsisten, dan peek kartu berikutnya yang lebih terukur.
 - Hapus Karier/Careers dari navigasi publik dan pilihan topik form Contact pada kedua bahasa.
 - Tambahkan halaman FAQ bilingual dengan Search Desk, filter/pencarian GET, accordion native, empty state, CTA Contact, metadata, dan JSON-LD published-only.

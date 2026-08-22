@@ -32,14 +32,6 @@ export default async function FaqRoute({ params, searchParams }: FaqRouteProps) 
   const activeCategory = (Array.isArray(filters.category) ? filters.category[0] : filters.category)?.trim().slice(0, 100) ?? "";
   const hasFilterParameters = filters.q !== undefined || filters.category !== undefined;
   const categories = await getPublishedFaq(locale);
-  const normalizedQuery = query.toLocaleLowerCase(locale === "id" ? "id-ID" : "en-US");
-  const visibleCategories = categories.flatMap((category) => {
-    if (activeCategory && category.slug !== activeCategory) return [];
-    const items = normalizedQuery
-      ? category.items.filter((item) => `${item.question} ${item.answer}`.toLocaleLowerCase(locale === "id" ? "id-ID" : "en-US").includes(normalizedQuery))
-      : category.items;
-    return items.length ? [{ ...category, items }] : [];
-  });
   const jsonLd = !hasFilterParameters && categories.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -53,6 +45,6 @@ export default async function FaqRoute({ params, searchParams }: FaqRouteProps) 
   return <>
     <SiteHeader locale={locale} content={siteContent[locale]} />
     {jsonLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} /> : null}
-    <FaqPage locale={locale} content={faqPageContent[locale]} categories={categories} visibleCategories={visibleCategories} query={query} activeCategory={activeCategory} />
+    <FaqPage locale={locale} content={faqPageContent[locale]} categories={categories} query={query} activeCategory={activeCategory} />
   </>;
 }

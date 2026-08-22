@@ -10,7 +10,8 @@ export type FaqPageContent = {
   searchPlaceholder: string;
   searchButton: string;
   allCategories: string;
-  resultsLabel: (count: number) => string;
+  resultsLabel: string;
+  loadingLabel: string;
   emptyTitle: string;
   emptyDescription: string;
   noResultsTitle: string;
@@ -34,7 +35,8 @@ export const faqPageContent: Record<Locale, FaqPageContent> = {
     searchPlaceholder: "Ketik kata kunci…",
     searchButton: "Cari",
     allCategories: "Semua topik",
-    resultsLabel: (count) => `${count} jawaban ditemukan`,
+    resultsLabel: "jawaban ditemukan",
+    loadingLabel: "Memuat jawaban…",
     emptyTitle: "FAQ sedang disiapkan",
     emptyDescription: "Belum ada pertanyaan yang diterbitkan. Anda tetap dapat menghubungi tim Afana secara langsung.",
     noResultsTitle: "Belum menemukan jawaban",
@@ -56,7 +58,8 @@ export const faqPageContent: Record<Locale, FaqPageContent> = {
     searchPlaceholder: "Enter a keyword…",
     searchButton: "Search",
     allCategories: "All topics",
-    resultsLabel: (count) => `${count} answers found`,
+    resultsLabel: "answers found",
+    loadingLabel: "Loading answers…",
     emptyTitle: "The FAQ is being prepared",
     emptyDescription: "No questions have been published yet. You can still contact the Afana team directly.",
     noResultsTitle: "No matching answer yet",

@@ -161,7 +161,8 @@ Halaman Contact memakai route `/id/kontak` dan `/en/contact` dengan mode persuad
 Halaman FAQ memakai route bilingual `/id/faq` dan `/en/faq` dengan pola Search Desk.
 
 - Hero interior menggunakan tinggi `60svh` dan minimum `512px`, dengan connection grid teknis sebagai signature visual tanpa aset foto tambahan.
-- Pencarian dan filter kategori memakai query GET `q` dan `category`, sehingga state dapat dibagikan, dibuka ulang, dan tetap berfungsi tanpa Client Component.
+- Pencarian dan filter kategori memakai query GET `q` dan `category`, sehingga state dapat dibagikan, dibuka ulang, serta tetap memiliki fallback navigasi native tanpa JavaScript.
+- Interaksi pencarian dan kategori memakai client-side route transition dengan `scroll: false`; posisi baca tidak kembali ke hero. Data hasil sebelumnya dipertahankan selama transisi dan hanya FAQ desk yang menampilkan progress lokal serta status `aria-busy` bilingual.
 - Daftar pertanyaan menggunakan accordion native `details/summary`; pertanyaan, jawaban, filter, empty state, dan CTA Contact tersedia setara dalam Indonesia dan Inggris.
 - Desktop memakai sidebar pencarian sticky dan ledger FAQ di kanan. Mobile menyusun pencarian, filter, lalu pertanyaan secara vertikal tanpa horizontal overflow.
 - JSON-LD `FAQPage` hanya ditampilkan pada URL dasar tanpa filter dan hanya berisi revision published dari kategori aktif.
