@@ -1,5 +1,6 @@
 export function scrollToAboutSection(target: string) {
-  const section = document.getElementById(target.replace(/^#/, ""));
+  const sectionId = target.replace(/^#/, "");
+  const section = document.getElementById(sectionId);
   if (!section) {
     return;
   }
@@ -16,7 +17,7 @@ export function scrollToAboutSection(target: string) {
     top: Math.max(0, targetDocumentTop - targetOffset),
     behavior: prefersReducedMotion ? "auto" : "smooth",
   });
-  window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+  window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#${sectionId}`);
 
   window.setTimeout(() => {
     const navigationBottom = sectionNavigation?.getBoundingClientRect().bottom ?? 0;

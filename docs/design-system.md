@@ -74,6 +74,7 @@ Header adalah elemen fixed di atas viewport:
 - Navigasi section About memakai offset yang sama dengan kondisi header. Saat header tersembunyi, navigasi section naik ke batas atas viewport tanpa meninggalkan celah.
 - Saat hamburger menu terbuka, header tetap berada di layer teratas dan overlay menu menempel langsung ke viewport.
 - Hamburger menu dapat ditutup melalui tombol close, link navigasi, atau tombol `Escape`.
+- Pada mobile, chevron hanya menandai item yang memiliki submenu. Drawer dikecualikan dari listener klik-luar dropdown desktop agar submenu tidak terlipat di antara `pointerdown` dan `pointerup`; link section About lalu menutup drawer, menjalankan scroll dengan offset stabil, dan mempertahankan hash tujuan pada URL.
 
 Pada desktop, navigasi memiliki primary navigation dan utility navigation. CTA header berada di utility navigation, sejajar dengan link pendukung dan bahasa di sisi kanan. Dropdown menggunakan focus state, hover state, dan panel putih dengan radius serta shadow ringan.
 

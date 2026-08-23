@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Perbaiki navigasi mobile agar listener klik-luar desktop tidak melipat submenu pada `pointerdown`, sehingga `pointerup` tetap mengaktifkan link section yang disentuh; pertahankan hash About dan tampilkan chevron hanya pada item yang memiliki submenu.
 - Ubah pencarian dan filter FAQ menjadi client-side transition tanpa scroll ke hero, dengan progress loading lokal yang mempertahankan hasil sebelumnya.
 - Perbaiki komposisi Bisnis Afana pada mobile dengan tab selebar konten, kartu `75vw`, snap offset yang konsisten, dan peek kartu berikutnya yang lebih terukur.
 - Hapus Karier/Careers dari navigasi publik dan pilihan topik form Contact pada kedua bahasa.

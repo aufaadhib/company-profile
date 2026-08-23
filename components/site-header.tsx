@@ -67,13 +67,30 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
   const otherLabel = otherLocale === "id" ? "ID" : "EN";
   const otherLocaleHref = getOtherLocaleHref(pathname, locale);
 
-  function handleSectionLink(event: MouseEvent<HTMLAnchorElement>, href: string) {
+  function closeMobileNavigation() {
+    setIsOpen(false);
+    setOpenDropdown(null);
+  }
+
+  function handleSectionLink(event: MouseEvent<HTMLAnchorElement>, href: string, shouldCloseMobileNavigation = false) {
     const [targetPath, hash] = href.split("#");
     if (!hash || targetPath !== pathname) {
+      if (shouldCloseMobileNavigation) {
+        closeMobileNavigation();
+      }
       return;
     }
 
     event.preventDefault();
+
+    if (shouldCloseMobileNavigation) {
+      closeMobileNavigation();
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => scrollToAboutSection(`#${hash}`));
+      });
+      return;
+    }
+
     scrollToAboutSection(`#${hash}`);
   }
 
@@ -107,7 +124,10 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
   useEffect(() => {
     function handlePointerDown(event: PointerEvent) {
       const header = headerRef.current;
-      if (header && !header.contains(event.target as Node)) {
+      const mobileNavigation = document.getElementById("mobile-navigation");
+      const target = event.target as Node;
+
+      if (header && !header.contains(target) && !mobileNavigation?.contains(target)) {
         setOpenDropdown(null);
       }
     }
@@ -244,7 +264,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
       <div id="mobile-navigation" className="fixed inset-0 z-[55] overflow-y-auto bg-[rgba(1,14,18,.92)] backdrop-blur-[2px] lg:hidden">
         <div className="mx-auto flex min-h-full w-full max-w-[640px] flex-col px-6 pb-6 pt-28 sm:px-10">
           <div className="mb-4 flex justify-end">
-            <Link href={otherLocaleHref} className="flex min-h-11 items-center gap-2 text-xs font-semibold tracking-[0.16em] text-white/80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
+            <Link href={otherLocaleHref} className="flex min-h-11 items-center gap-2 text-xs font-semibold tracking-[0.16em] text-white/80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={closeMobileNavigation}>
               {otherLabel}
               <span className="size-2 rounded-full bg-[var(--accent)]" aria-hidden="true" />
             </Link>
@@ -256,9 +276,8 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
 
             if (!hasChildren) {
               return (
-                <Link key={item.label} href={getLocaleHref(item.href, locale)} className="flex min-h-14 items-center justify-between border-b border-white/15 text-base font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
+                <Link key={item.label} href={getLocaleHref(item.href, locale)} className="flex min-h-14 items-center justify-between border-b border-white/15 text-base font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" onClick={closeMobileNavigation}>
                   {item.label}
-                  <ChevronIcon isOpen={false} />
                 </Link>
               );
             }
@@ -278,8 +297,7 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
                   <div className="-mx-1 mb-3 px-1 py-1">
                     {item.children?.map((child) => (
                       <Link key={child.label} href={getLocaleHref(child.href, locale)} className="flex min-h-11 items-center px-3 text-sm font-normal text-white/65 transition-[color,transform] duration-200 hover:translate-x-1 hover:text-[var(--accent)] focus-visible:translate-x-1 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-white" onClick={(event) => {
-                        handleSectionLink(event, getLocaleHref(child.href, locale));
-                        setIsOpen(false);
+                        handleSectionLink(event, getLocaleHref(child.href, locale), true);
                       }}>
                         {child.label}
                       </Link>
@@ -293,12 +311,12 @@ export function SiteHeader({ locale, content, solid = false }: SiteHeaderProps) 
           <div className="mt-8 border-t border-white/15 pt-5">
             <nav aria-label="Mobile utility navigation" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs font-medium text-white/85">
               {content.mobileFooterNav.map((item) => (
-                <Link key={item.label} href={getLocaleHref(item.href, locale)} className="min-h-11 flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
+                <Link key={item.label} href={getLocaleHref(item.href, locale)} className="min-h-11 flex items-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={closeMobileNavigation}>
                   {item.label}
                 </Link>
               ))}
             </nav>
-            <Link href={getLocaleHref(content.headerCtaHref, locale)} className="mx-auto mt-3 flex min-h-11 w-fit items-center rounded-full border border-white/80 px-5 text-xs font-semibold text-white transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => setIsOpen(false)}>
+            <Link href={getLocaleHref(content.headerCtaHref, locale)} className="mx-auto mt-3 flex min-h-11 w-fit items-center rounded-full border border-white/80 px-5 text-xs font-semibold text-white transition-colors hover:bg-white hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={closeMobileNavigation}>
               {content.headerCtaLabel}
             </Link>
           </div>
