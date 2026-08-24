@@ -91,7 +91,7 @@ export function MediaPage({ content, locale, detailBasePath }: MediaPageProps) {
 
   return (
     <main id="main-content" className="flex-1 bg-[var(--paper)]">
-      <section aria-labelledby="media-hero-title" className="media-news-hero relative isolate h-[100svh] min-h-[100svh] max-h-[100svh] overflow-hidden bg-[var(--ink)] text-white">
+      <section aria-labelledby="media-hero-title" className="media-news-hero relative isolate min-h-[100svh] overflow-hidden bg-[var(--ink)] text-white">
         <h1 id="media-hero-title" className="sr-only">{content.title}</h1>
         <Swiper
           a11y={{
@@ -101,7 +101,7 @@ export function MediaPage({ content, locale, detailBasePath }: MediaPageProps) {
           }}
           aria-label={content.title}
           autoplay={{ enabled: !reducedMotion, delay: 8000, disableOnInteraction: false, pauseOnMouseEnter: false }}
-          className="media-news-hero__swiper h-full"
+          className="media-news-hero__swiper min-h-[inherit]"
           effect="fade"
           fadeEffect={{ crossFade: true }}
           keyboard={{ enabled: true }}
@@ -109,9 +109,10 @@ export function MediaPage({ content, locale, detailBasePath }: MediaPageProps) {
           modules={[A11y, Autoplay, EffectFade, Keyboard, Pagination]}
           pagination={{ clickable: true }}
           speed={1000}
+          wrapperClass="min-h-[inherit]"
         >
           {latestNews.map((item, index) => (
-            <SwiperSlide key={item.id} className="relative !flex h-full min-h-0">
+            <SwiperSlide key={item.id} className="relative !flex min-h-[inherit]">
               <Image
                 src={item.image}
                 alt={item.imageAlt}
@@ -122,7 +123,7 @@ export function MediaPage({ content, locale, detailBasePath }: MediaPageProps) {
               />
               <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,20,27,.9)_0%,rgba(1,36,46,.55)_58%,rgba(1,20,27,.25)_100%)]" />
               <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(1,20,27,.94)_0%,rgba(1,20,27,.12)_78%)]" />
-              <div className="relative z-10 mx-auto flex h-full w-full max-w-[1440px] items-end px-6 pb-24 pt-36 sm:px-10 sm:pb-24 lg:px-20 lg:pb-16">
+              <div className="hero-safe-content relative z-10 mx-auto flex w-full max-w-[1440px] items-end px-6 pb-24 sm:px-10 sm:pb-24 lg:px-20 lg:pb-16">
                 <div className="max-w-4xl">
                   <div className="hero-eyebrow mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-white/75">
                     <span>{content.eyebrow}</span>

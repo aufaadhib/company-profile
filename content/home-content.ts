@@ -106,6 +106,12 @@ export const homePageContent: Record<Locale, HomePageContent> = {
               image: "/images/sustainability/maintained-infrastructure.png",
               imageAlt: "Infrastruktur kelistrikan industri yang tertata dan terawat",
             },
+            {
+              title: "Peralatan listrik Afana",
+              body: "Afana memproduksi peralatan listrik yang dirancang untuk menjaga daya tetap stabil, bekerja tahan lama, dan mendukung kebutuhan operasional secara konsisten.",
+              image: "/images/home/afana-electrical-equipment.png",
+              imageAlt: "Ilustrasi perangkat pengondisi daya listrik industrial dengan konstruksi logam",
+            },
           ],
         },
         {
@@ -218,6 +224,12 @@ export const homePageContent: Record<Locale, HomePageContent> = {
               body: "Keeping systems readable, maintainable, and ready for changing requirements.",
               image: "/images/sustainability/maintained-infrastructure.png",
               imageAlt: "Orderly and well-maintained industrial electrical infrastructure",
+            },
+            {
+              title: "Afana electrical equipment",
+              body: "Afana manufactures electrical equipment designed to deliver stable power, durable performance, and consistent support for operational needs.",
+              image: "/images/home/afana-electrical-equipment.png",
+              imageAlt: "Illustration of an industrial power-conditioning unit with a metal enclosure",
             },
           ],
         },

@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <div className={`${lexend.variable} ${sourceSans.variable} font-sans text-[var(--ink)]`}>
       <SiteHeader locale="id" content={siteContent.id} solid />
-      <main id="main-content" className="flex h-screen items-center justify-center bg-white px-6 pt-20 text-center sm:px-10">
+      <main id="main-content" className="flex min-h-screen items-center justify-center bg-white px-6 pt-20 text-center sm:px-10">
         <section aria-labelledby="not-found-title" className="max-w-3xl">
           <p className="font-display text-[clamp(4.5rem,10vw,7.5rem)] font-semibold leading-none tracking-[-0.08em] text-[var(--accent)]">
             404

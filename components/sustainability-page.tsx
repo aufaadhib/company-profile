@@ -23,11 +23,11 @@ function FlowStep({ step }: { step: SustainabilityStep }) {
 export function SustainabilityPage({ content, locale }: SustainabilityPageProps) {
   return (
     <main id="main-content" className="flex-1 bg-[var(--paper)]">
-      <section className="relative isolate h-[60svh] min-h-[32rem] overflow-hidden bg-[var(--ink)] text-white">
+      <section className="interior-hero relative isolate overflow-hidden bg-[var(--ink)] text-white">
         <Image src={content.heroImage} alt="" fill loading="eager" sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,20,27,.88)_0%,rgba(1,36,46,.52)_56%,rgba(1,20,27,.2)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(1,20,27,.9)_0%,rgba(1,20,27,.05)_72%)]" />
-        <div className="relative z-10 mx-auto flex h-full w-full max-w-[1440px] items-end px-6 pb-16 pt-36 sm:px-10 sm:pb-20 lg:px-20 lg:pb-24">
+        <div className="hero-safe-content relative z-10 mx-auto flex w-full max-w-[1440px] items-end px-6 pb-16 sm:px-10 sm:pb-20 lg:px-20 lg:pb-24">
           <div className="max-w-5xl">
             <p className="hero-breadcrumb mb-8 flex flex-wrap items-center gap-3 text-white/90">
               <span>{content.breadcrumbHome}</span><span aria-hidden="true" className="text-white/60">/</span><span>{content.breadcrumbCurrent}</span>

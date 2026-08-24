@@ -25,8 +25,8 @@ export function MediaArticle({ content, item, locale, detailBasePath }: MediaArt
 
   return (
     <main id="main-content" className="flex-1 bg-[var(--paper)]">
-      <section className="min-h-[60svh] bg-[var(--ink)] text-white">
-        <div className="mx-auto flex min-h-[60svh] w-full max-w-[1180px] flex-col justify-end px-6 pb-16 pt-36 sm:px-10 sm:pb-20 lg:px-12 lg:pb-24">
+      <section className="interior-hero bg-[var(--ink)] text-white">
+        <div className="hero-safe-content mx-auto flex w-full max-w-[1180px] flex-col justify-end px-6 pb-16 sm:px-10 sm:pb-20 lg:px-12 lg:pb-24">
           <Link href={detailBasePath} className="hero-action inline-flex min-h-11 w-fit items-center text-white/75 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
             <span aria-hidden="true" className="mr-3 text-lg leading-none">←</span>
             {content.backLabel}

@@ -16,7 +16,7 @@ export function HeroCarousel({ slides, content }: HeroCarouselProps) {
   const reducedMotion = usePrefersReducedMotion();
 
   return (
-    <section id="hero" className="hero-carousel relative h-[100svh] min-h-[100svh] max-h-[100svh] overflow-hidden bg-[var(--ink)] text-white">
+    <section id="hero" className="hero-carousel relative h-[100svh] min-h-[100svh] overflow-hidden bg-[var(--ink)] text-white lg:min-h-[40rem]">
       <Swiper
         modules={[A11y, Autoplay, EffectFade, Keyboard, Pagination]}
         id="hero-copy"
@@ -58,7 +58,7 @@ export function HeroCarousel({ slides, content }: HeroCarouselProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="pointer-events-none absolute inset-0 z-20 flex items-end px-6 pb-36 sm:px-10 sm:pb-40 lg:px-20 lg:pb-44">
+      <div className="pointer-events-none absolute inset-0 z-20 flex items-end px-6 pb-36 pt-28 sm:px-10 sm:pb-40 lg:px-20 lg:pb-44 lg:pt-36">
         <div className="min-w-0 max-w-3xl flex-1 text-left">
           <p className="hero-eyebrow mb-4 text-white/80">
             {content.slides[0].eyebrow}

@@ -35,6 +35,7 @@ Header dan navigasi menggunakan permukaan putih dengan transparansi tinggi saat 
 ### Tipografi
 
 - Standar font, ukuran, line-height, tracking, dan tinggi seluruh hero berada di `docs/hero-standards.md` dan wajib digunakan bersama.
+- Seluruh hero memakai minimum height berbasis viewport dan safe area header bersama; copy dapat memperbesar section pada viewport pendek, browser zoom, atau locale yang lebih panjang.
 - `Lexend` melalui `next/font/local` digunakan untuk logo wordmark, heading, navigasi utama, label display, dan angka besar.
 - `Source Sans 3` melalui `next/font/local` digunakan untuk body copy, utility navigation, deskripsi, dan teks pendukung.
 - Heading memakai tracking negatif yang rapat dan ukuran fluid dengan `clamp()`.
@@ -90,6 +91,7 @@ Hero home adalah media full-bleed dengan tinggi `100svh` dan fokus pada solusi k
 - Heading besar menyampaikan manfaat utama solusi kelistrikan bagi perlindungan perangkat.
 - Rail pagination berada di bagian bawah hero dan berfungsi sebagai penanda slide sekaligus kontrol navigasi.
 - Swiper memakai fade transition dengan speed `1200ms`, keyboard navigation, pagination clickable, accessibility labels, dan autoplay `7000ms`.
+- Home mempertahankan layer media dan copy full-screen; pada desktop tinggi minimumnya `640px` agar header, copy, dan pagination tidak bertabrakan pada viewport pendek.
 - Seluruh media hero dimuat eager karena setiap slide full-viewport dapat menjadi kandidat LCP saat autoplay; jumlahnya tetap dibatasi pada aset hero.
 
 ## Home sections
@@ -97,7 +99,8 @@ Hero home adalah media full-bleed dengan tinggi `100svh` dan fokus pada solusi k
 Setelah hero, Home membentuk alur corporate editorial yang menghubungkan profil, ruang solusi, cara kerja, keberlanjutan, Media, dan Contact tanpa mengulang komposisi hero interior.
 
 - Teaser profil memakai susunan media dan copy asimetris dengan satu garis oranye sebagai penanda aliran energi.
-- Anchor `#bisnis-afana` menampilkan ruang solusi dengan tab Fokus Sistem dan Pendekatan Kerja. Setiap tab berisi empat kartu interaktif: gambar dan judul di depan, lalu ringkasan teknis setelah kartu berputar.
+- Anchor `#bisnis-afana` menampilkan ruang solusi dengan tab Fokus Sistem dan Pendekatan Kerja. Fokus Sistem memiliki lima kartu, termasuk lini produksi peralatan listrik Afana, sedangkan Pendekatan Kerja memiliki empat kartu. Setiap kartu menampilkan gambar dan judul di depan, lalu ringkasan teknis setelah kartu berputar.
+- Pada desktop lebar, rail Bisnis Afana memakai lima kolom fluid agar kartu produksi tetap satu baris; tab empat kartu tetap rapat ke kiri dan menyisakan ruang di kanan.
 - Pada mobile, segmented tab memenuhi lebar konten dan kartu solusi memakai `75vw` agar satu kartu menjadi fokus dengan sedikit peek kartu berikutnya sebagai petunjuk swipe. Tablet dan desktop mempertahankan ukuran 75% dari grid, card tetap menempel ke kiri dengan gap rapat dan whitespace di sisi kanan, sementara rasio portrait menjaga hierarki gambar dan judul.
 - Fine pointer membalik kartu saat hover. Keyboard memakai Enter/Space dan perangkat sentuh memakai tap untuk mengunci atau mengembalikan kartu; nama tindakan dan ringkasan tetap tersedia bagi screen reader.
 - Permukaan depan card tidak memakai ikon flip dekoratif; affordance tetap tersedia melalui hover, tap, keyboard, dan accessible label.
@@ -144,6 +147,19 @@ Halaman Sustainability menggunakan arah technical sustainability editorial yang 
 - Copy versi awal bersifat draft aspiratif; angka dampak, target, sertifikasi, dan klaim faktual tidak boleh ditambahkan tanpa persetujuan pengguna.
 - Halaman menggunakan aset gambar khusus di `public/images/sustainability` dan tetap mengikuti aturan `next/image`, ukuran responsif, alt text, dan lazy loading di bawah fold.
 - Foto inspeksi pada Fokus Keberlanjutan memakai kualitas optimizer `90` untuk mempertahankan detail panel dan kabel yang rapat.
+
+## Bisnis Afana
+
+Halaman Bisnis Afana memperluas ringkasan solusi di Home menjadi halaman pengenalan bisnis yang utuh.
+
+- Route bilingual menggunakan `/id/bisnis` dan `/en/business`; `/bisnis` mengarahkan pengunjung ke versi Indonesia.
+- Hero interior setinggi `60svh` dengan minimum `512px` mengikuti komposisi Sustainability: media full-bleed, dual overlay, dan ruang copy terbuka di sisi kiri.
+- Introduction memakai layout dua kolom dengan elemen signature berupa angka besar (`80%`) di sisi kiri, dipisahkan garis oranye vertikal. Klaim ini berasal dari konten yang telah diberikan pengguna dan tetap memerlukan persetujuan untuk publikasi final.
+- Fokus sistem memakai showcase master-detail: visual aktif berukuran besar di kiri dan empat kontrol fokus di kanan. Klik atau keyboard pada kontrol mengganti visual; Swiper melakukan autoplay setiap enam detik, berhenti saat hover, dan dinonaktifkan untuk reduced motion.
+- Equipment memakai komposisi full-bleed media dengan dual gradient overlay dan copy di area kiri bawah, serupa dengan komposisi hero interior. Garis oranye horizontal menjadi separator visual.
+- Pendekatan kerja menampilkan empat panel bernomor tanpa garis koneksi atau node. Panel disusun rapat pada mobile dan sedikit bertingkat pada desktop agar urutan tetap terbaca tanpa dekorasi timeline.
+- CTA memakai komposisi centered pada permukaan aksen dengan tombol pill putih yang berinversi saat hover, mirip pola Sustainability CTA.
+- Route dan section statis tetap berupa Server Component; batas Client Component hanya digunakan pada showcase Fokus Sistem yang memakai Swiper terpasang untuk tab, fade transition, keyboard navigation, dan autoplay.
 
 ## Contact
 
@@ -210,7 +226,7 @@ Footer menggunakan permukaan `--ink` dengan teks putih dan struktur kolom inform
 - Route publik menggunakan `/id` dan `/en` sebagai prefix wajib.
 - Link lintas halaman harus di-resolve melalui locale aktif, termasuk link menuju anchor seperti `/${locale}/#hero-copy`.
 - Hash-only link hanya untuk navigasi di section pada halaman yang sedang dibuka.
-- Language switcher mempertahankan pathname dan slug aktif; segment About dipetakan antara `/tentang-kami` dan `/about`, sedangkan Media & Informasi dipetakan antara `/media-informasi` dan `/media-information`.
+- Language switcher mempertahankan pathname dan slug aktif; segment About dipetakan antara `/tentang-kami` dan `/about`, Bisnis antara `/bisnis` dan `/business`, sedangkan Media & Informasi antara `/media-informasi` dan `/media-information`.
 
 ## Motion dan state
 

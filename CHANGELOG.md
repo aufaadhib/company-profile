@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Perbaiki seluruh hero publik agar berbasis minimum height dan safe area header bersama, sehingga copy tidak bertabrakan dengan navigasi atau terpotong pada viewport pendek dan browser zoom.
+
+- Tambahkan halaman Bisnis Afana bilingual pada `/id/bisnis` dan `/en/business`, redirect `/bisnis`, navigasi locale-aware, fokus sistem, peralatan listrik, jalur pendekatan kerja, serta metadata canonical.
+- Tambahkan kartu produksi peralatan listrik Afana pada Bisnis Afana dalam bahasa Indonesia dan Inggris, lengkap dengan visual produk industrial baru serta grid desktop lima kolom.
 - Perbaiki navigasi mobile agar listener klik-luar desktop tidak melipat submenu pada `pointerdown`, sehingga `pointerup` tetap mengaktifkan link section yang disentuh; pertahankan hash About dan tampilkan chevron hanya pada item yang memiliki submenu.
 - Ubah pencarian dan filter FAQ menjadi client-side transition tanpa scroll ke hero, dengan progress loading lokal yang mempertahankan hasil sebelumnya.
 - Perbaiki komposisi Bisnis Afana pada mobile dengan tab selebar konten, kartu `75vw`, snap offset yang konsisten, dan peek kartu berikutnya yang lebih terukur.

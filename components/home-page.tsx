@@ -30,6 +30,7 @@ function EditorialLink({ href, children, inverse = false }: { href: string; chil
 export function HomePage({ locale, siteContent }: HomePageProps) {
   const content = homePageContent[locale];
   const aboutHref = locale === "id" ? "/id/tentang-kami" : "/en/about";
+  const businessHref = locale === "id" ? "/id/bisnis" : "/en/business";
   const focusHref = `${aboutHref}#fokus-solusi`;
   const sustainabilityHref = locale === "id" ? "/id/keberlanjutan" : "/en/sustainability";
   const mediaHref = locale === "id" ? "/id/media-informasi" : "/en/media-information";
@@ -65,7 +66,7 @@ export function HomePage({ locale, siteContent }: HomePageProps) {
         </div>
       </section>
 
-      <HomeSolutions content={content.solutions} detailHref={focusHref} />
+      <HomeSolutions content={content.solutions} detailHref={businessHref} />
 
       <section id="cara-kerja-afana" className="scroll-mt-20 bg-[var(--ink)] text-white">
         <div className="mx-auto w-full max-w-[1440px] px-6 py-20 sm:px-10 sm:py-24 lg:px-20 lg:py-28">

@@ -31,18 +31,21 @@ Seluruh hero memakai skala judul yang sama. Hero title memakai `text-wrap: balan
 
 | Hero | Height | Reason |
 | --- | --- | --- |
-| Home | `100svh` | Pengalaman pembuka utama dan carousel brand. |
-| Media listing | `100svh` | Carousel berita utama membutuhkan ruang media penuh. |
+| Home | `100svh`, minimum `640px` pada desktop | Carousel brand tetap full-screen; minimum desktop melindungi copy dan pagination pada viewport pendek. |
+| Media listing | Minimum `100svh`, content-led | Carousel berita memenuhi viewport tanpa memotong judul, ringkasan, atau CTA dari CMS. |
 | About | `60svh`, minimum `512px` | Interior landing lebih ringkas agar konten berikutnya cepat terlihat. |
 | Sustainability | `60svh`, minimum `512px` | Menghindari pengulangan komposisi full-screen dan mempercepat transisi ke isi. |
+| Business | `60svh`, minimum `512px` | Menyamakan ritme hero interior dengan Sustainability sambil menempatkan produk sebagai konteks utama. |
 | Contact | `60svh`, minimum `512px` | Interior conversion page dengan transisi cepat menuju kanal dan form. |
 | FAQ | `60svh`, minimum `512px` | Interior information desk yang segera mengantar pembaca ke pencarian dan accordion. |
-| Media article | Content-led, minimum `60svh` | Judul artikel dapat memanjang tanpa terpotong. |
+| Media article | Content-led, minimum `max(60svh, 512px)` | Judul artikel dapat memanjang tanpa terpotong. |
 
 ## Responsive rules
 
 - Semua hero tetap mobile-first dan diperiksa pada `375px`, `768px`, `1024px`, dan `1440px`.
 - Jangan mengurangi body hero di bawah `16px` atau label di bawah `12px`.
-- Hero 3/5 viewport wajib memiliki minimum height agar breadcrumb, judul, dan deskripsi tidak terpotong pada layar pendek.
-- Gunakan `100svh` untuk hero full-screen agar mengikuti viewport mobile modern.
+- Tinggi hero adalah minimum, bukan maksimum. Hero wajib tumbuh mengikuti copy pada viewport pendek, browser zoom, dan locale dengan teks lebih panjang.
+- `.hero-safe-content` menyediakan safe area `112px` pada mobile/tablet dan `144px` pada desktop terhadap header awal yang fixed.
+- Gunakan minimum `100svh` untuk hero full-screen agar mengikuti viewport mobile modern tanpa mengunci overflow konten.
 - Hero image tetap memakai ruang yang dicadangkan, overlay kontras, dan `sizes="100vw"` bila full-bleed.
+- Carousel autoplay dinonaktifkan ketika `prefers-reduced-motion` aktif.

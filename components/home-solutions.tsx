@@ -307,7 +307,7 @@ export function HomeSolutions({ content, detailHref }: HomeSolutionsProps) {
           id={panelId}
           role="tabpanel"
           aria-labelledby={`home-solutions-tab-${activeTab.id}`}
-          className="home-solutions__rail -mx-6 mt-5 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-3 sm:-mx-10 sm:mt-6 sm:scroll-px-10 sm:px-10 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 xl:w-fit xl:grid-cols-[repeat(4,14rem)] xl:gap-4"
+          className="home-solutions__rail -mx-6 mt-5 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-3 sm:-mx-10 sm:mt-6 sm:scroll-px-10 sm:px-10 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0 xl:w-full xl:grid-cols-5 xl:gap-4"
         >
           {activeTab.cards.map((card, index) => {
             const isFlipped = flippedCardTitle === card.title;

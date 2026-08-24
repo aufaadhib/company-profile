@@ -95,6 +95,21 @@ textarea {
   line-height: 1.25rem;
 }
 
+.interior-hero {
+  min-height: max(32rem, 60svh);
+}
+
+.hero-safe-content {
+  min-height: inherit;
+  padding-top: 7rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-safe-content {
+    padding-top: 9rem;
+  }
+}
+
 ::selection {
   background: var(--accent);
   color: white;

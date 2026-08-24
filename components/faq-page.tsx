@@ -29,9 +29,9 @@ function DeskGraphic() {
 export function FaqPage({ locale, content, categories, query, activeCategory }: FaqPageProps) {
   return (
     <main id="main-content" className="flex-1 bg-[var(--paper)]">
-      <section aria-labelledby="faq-title" className="relative isolate h-[60svh] min-h-[512px] overflow-hidden bg-[var(--ink)] text-white">
+      <section aria-labelledby="faq-title" className="interior-hero relative isolate overflow-hidden bg-[var(--ink)] text-white">
         <div className="absolute inset-y-0 right-0 hidden w-[48%] text-white lg:block"><DeskGraphic /></div>
-        <div className="relative z-10 mx-auto flex h-full w-full max-w-[1440px] items-end px-6 pb-14 pt-32 sm:px-10 sm:pb-18 lg:px-20 lg:pb-20">
+        <div className="hero-safe-content relative z-10 mx-auto flex w-full max-w-[1440px] items-end px-6 pb-14 sm:px-10 sm:pb-18 lg:px-20 lg:pb-20">
           <div className="max-w-3xl">
             <p className="hero-breadcrumb mb-8 flex flex-wrap items-center gap-3 text-white/85"><span>{content.breadcrumbHome}</span><span aria-hidden="true" className="text-white/45">/</span><span>{content.breadcrumbCurrent}</span></p>
             <p className="hero-eyebrow mb-5 text-[var(--accent)]">{content.eyebrow}</p>
